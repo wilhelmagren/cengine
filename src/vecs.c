@@ -52,6 +52,7 @@ iVec3d* iVec3d_new(int x, int y, int z) {
     ivec->x = x;
     ivec->y = y;
     ivec->z = z;
+    return ivec;
 }
 
 void iVec3d_print(iVec3d* ivec) {
@@ -59,18 +60,3 @@ void iVec3d_print(iVec3d* ivec) {
     printf(string, ivec->x, ivec->y, ivec->z, ivec);
 }
 
-/*
-int main() {
-    Vec3d* vec = Vec3d_new(1.0f, 1.0f, 2.0f);
-    Vec3d* v = Vec3d_new(2.0f, -2.0f, 4.0f);
-    Vec3d_print(vec);
-    Vec3d_print(v);
-    float dot = Vec3d_dotprod(vec, v);
-    printf("dot product res: %f\n", dot);
-    Vec3d_add(vec, v, vec);
-    free(v);
-    // free(vec);
-    Vec3d_print(vec);
-    return 0;
-}
-*/
