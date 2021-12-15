@@ -15,12 +15,3 @@ void Polygon_print(Polygon* poly) {
     printf(string, poly);
 }
 
-
-int main() {
-    Vec3d* u = Vec3d_new(0.0f, 0.0f, 0.0f);
-    Vec3d* v = Vec3d_new(0.0f, 1.0f, 0.0f);
-    Vec3d* w = Vec3d_new(1.0f, 1.0f, 0.0f);
-    Polygon* poly = Polygon_new(u,v,w);
-    Polygon_print(poly);
-    return 0;
-}

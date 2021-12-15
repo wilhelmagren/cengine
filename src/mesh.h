@@ -6,10 +6,11 @@
 
 typedef struct {
     Polygon* polygons[MESH_BUFFER_SIZE];
-    int num_polygons;
+    int pidx;
 } Mesh;
 
-Mesh* mesh_new();
-void mesh_print(Mesh* m);
+Mesh* Mesh_new();
+void Mesh_print(Mesh* m);
+void Mesh_add(Mesh* m, Polygon* poly);
 
 #endif 

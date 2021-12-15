@@ -1,6 +1,13 @@
-OBJS = main.c
+CC = gcc
+CFLAGS = -Wall
+LDFLAGS =
 
-OBJ_NAME = main
+OBJFILES = src/vecs.o src/polygon.o src/mesh.o
 
-all : $(OBJS)
-	gcc $(OBJS) -w -lSDL2 -o $(OBJ_NAME)
+TARGET = cengine
+
+$(TARGET): $(OBJFILES)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJFILES) $(LDFLAGS)
+
+clean:
+	rm -f $(OBJFILES) $(TARGET) *~
