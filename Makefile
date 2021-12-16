@@ -1,10 +1,8 @@
 CC = gcc
 CFLAGS = -Wall
-LDFLAGS = -lSDL2
+LDFLAGS = -lSDL2 -lm
 
-OBJFILES = src/vecs.o src/polygon.o src/mesh.o src/main.o
-CFILES = src/vecs.c src/polygon.c src/mesh.c src/main.c
-
+OBJFILES = src/vecs.o src/polygon.o src/mesh.o src/cube_example.o src/draw.o src/mats.o
 TARGET = cengine
 
 $(TARGET): $(OBJFILES)

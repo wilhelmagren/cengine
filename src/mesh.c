@@ -18,4 +18,3 @@ void Mesh_add(Mesh* m, Polygon* poly) {
     m->polygons[m->pidx] = poly;
     m->pidx++;
 }
-
