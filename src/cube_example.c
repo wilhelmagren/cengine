@@ -73,12 +73,14 @@ int main(int argc, char** argv) {
     }
 
     SDL_bool quit = SDL_FALSE;
-    int counter = 0;
+    float counter = 0;
+    float desired_ms = 1000.0f / (float) FPS_TARGET;
     while (!quit) {
-        counter++;
-        if (counter >= 360) {
+        counter += 0.05f;
+        if (counter >= 360.0f) {
             counter = 0;
         }
+        uint64_t t_start = SDL_GetPerformanceCounter();
         MatRotX* rotX = MatRotX_new(counter);
         MatRotZ* rotZ = MatRotZ_new(counter);
 
@@ -96,6 +98,9 @@ int main(int argc, char** argv) {
         }
         free(rotX);
         free(rotZ);
+        uint64_t t_end = SDL_GetPerformanceCounter();
+        float ms_elapsed = (float)(t_end-t_start)/(float)SDL_GetPerformanceFrequency()*1000.0f;
+        SDL_Delay(floor(desired_ms - ms_elapsed));
     }
 
     SDL_DestroyRenderer(renderer);
