@@ -72,20 +72,23 @@ int main(int argc, char** argv) {
     }
 
     SDL_bool quit = SDL_FALSE;
-    float counter = 0;
-    float velX = 0.5f;
-    float velY = 0.0f;
-    float velZ = 0.2f;
-    float desired_ms = 1000.0f / (float) FPS_TARGET;
+    // set dtheta, (angle update), to increase by 2 each rendered frame
+    float theta = 0.0f, dtheta = 2.0f / (float)FPS_TARGET;
+    float velX = 0.5f, velY = 0.0f, velZ = 0.2f;
+    float desired_ms = 1000.0f / (float)FPS_TARGET;
+    printf("target fps: %d, target frame render-time: %f ms\n", FPS_TARGET, desired_ms);
+    printf("velocities: x=%0.2f  y=%0.2f  z=%0.2f\n", velX, velY, velZ);
+    printf("frame theta update=%0.2f\n", dtheta);
+
     while (!quit) {
-        counter += 0.1f;
-        if (counter >= 360.0f) {
-            counter = 0.0f;
+        theta += dtheta;
+        if (theta >= 360.0f) {
+            theta = 0.0f;
         }
         uint64_t t_start = SDL_GetPerformanceCounter();
-        Mat4x4* rotX = Mat4x4_RotX_new(counter, velX);
-        Mat4x4* rotY = Mat4x4_RotY_new(counter, velY);
-        Mat4x4* rotZ = Mat4x4_RotZ_new(counter, velZ);
+        Mat4x4* rotX = Mat4x4_RotX_new(theta, velX);
+        Mat4x4* rotY = Mat4x4_RotY_new(theta, velY);
+        Mat4x4* rotZ = Mat4x4_RotZ_new(theta, velZ);
 
         SDL_Event event;
         SDL_RenderSetLogicalSize(renderer, 0, 0);
@@ -100,13 +103,18 @@ int main(int argc, char** argv) {
             }
         }
 
-        free(rotX);
-        free(rotY);
-        free(rotZ);
         uint64_t t_end = SDL_GetPerformanceCounter();
         float ms_elapsed = (float)(t_end-t_start)/(float)SDL_GetPerformanceFrequency()*1000.0f;
         float delay = desired_ms - ms_elapsed;
-        SDL_Delay(fmax(0.0f, delay));
+        if (delay <= 0.0f) {
+            printf("no delay, current frame %0.3f ms behind target render-time...\n", delay);
+        } else {
+            SDL_Delay(fmax(0.0f, delay));
+        }
+
+        free(rotX);
+        free(rotY);
+        free(rotZ);
 
     }
 
