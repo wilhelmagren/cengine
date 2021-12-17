@@ -4,56 +4,104 @@
 #include <math.h>
 #include "mats.h"
 
-Mat4x4* Mat4x4_new() {
+Mat4x4* Mat4x4_Identity() {
+    Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));
+    float tmp[4][4] = {
+        {1.0f, 0.0f, 0.0f, 0.0f},
+        {0.0f, 1.0f, 0.0f, 0.0f},
+        {0.0f, 0.0f, 1.0f, 0.0f},
+        {0.0f, 0.0f, 0.0f, 1.0f}};
+    memcpy(mat->m, tmp, sizeof(tmp));
+    return mat;
+}
+
+Mat4x4* Mat4x4_Zeros() {
     Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));
     float tmp[4][4] = {
         {0.0f, 0.0f, 0.0f, 0.0f},
         {0.0f, 0.0f, 0.0f, 0.0f},
         {0.0f, 0.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f, 0.0f}
-    };
+        {0.0f, 0.0f, 0.0f, 0.0f}};
     memcpy(mat->m, tmp, sizeof(tmp));
     return mat;
-}
+};
+
+Mat4x4* Mat4x4_Ones() {
+    Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));
+    float tmp[4][4] = {
+        {1.0f, 1.0f, 1.0f, 1.0f},
+        {1.0f, 1.0f, 1.0f, 1.0f},
+        {1.0f, 1.0f, 1.0f, 1.0f},
+        {1.0f, 1.0f, 1.0f, 1.0f}};
+    memcpy(mat->m, tmp, sizeof(tmp));
+    return mat;
+};
 
 Mat4x4* Mat4x4_Proj_new(float zn, float zf, float fov, float ratio) {
     // Convert the fov from degrees to radians and calculate
     // scaling in z-direction based on zn & zf
     Mat4x4* proj = (Mat4x4*)malloc(sizeof(Mat4x4));
-    float fov_rad = (float) 1.0f / tan(fov * .5f / 180.f * 3.141592f);
+    float fov_rad = (float) 1.0f / tan(fov * 0.5f / 180.f * 3.141592f);
     float z_scale = (float) zf / (zf-zn);
     float x_scale = ratio*fov_rad;
     float tmp[4][4] = {
         {x_scale,  0.0f,        0.0f,  0.0f},
         {0.0f,  fov_rad,        0.0f,  0.0f},
         {0.0f,     0.0f,     z_scale,  1.0f},
-        {0.0f,     0.0f, -zn*z_scale,  0.0f}
-    };
+        {0.0f,     0.0f, -zn*z_scale,  0.0f}};
     memcpy(proj->m, tmp, sizeof(tmp));
     return proj;
 }
 
-Mat4x4* Mat4x4_RotX_new(float theta) {
-    Mat4x4* rot = (Mat4x4*)malloc(sizeof(Mat4x4));
-    float tmp[4][4] = {
-        {1.0f,               0.0f,              0.0f, 0.0f},
-        {0.0f,  cos(theta * 0.5f), sin(theta * 0.5f), 0.0f},
-        {0.0f, -sin(theta * 0.5f), cos(theta * 0.5f), 0.0f},
-        {0.0f,               0.0f,              0.0f, 1.0f}
-    };
-    memcpy(rot->m, tmp, sizeof(tmp));
+Mat4x4* Mat4x4_RotX_new(float theta, float vel) {
+    /*
+     * Rotate a 3d vector around the x-axis, also called 'roll'
+     * Based on the 3x3 matrix found at: https://en.wikipedia.org/wiki/Rotation_matrix
+     * but modified to deal with our added bias to the position Vec3d vector.
+     */
+    Mat4x4* rot = Mat4x4_Identity();
+    if (vel != 0.0f) {
+        float tmp[4][4] = {
+            {1.0f,             0.0f,              0.0f, 0.0f},
+            {0.0f, cos(theta * vel), -sin(theta * vel), 0.0f},
+            {0.0f, sin(theta * vel),  cos(theta * vel), 0.0f},
+            {0.0f,             0.0f,              0.0f, 1.0f}};
+        memcpy(rot->m, tmp, sizeof(tmp));
+    }
     return rot;
 }
 
-Mat4x4* Mat4x4_RotZ_new(float theta) {
-    Mat4x4* rot = (Mat4x4*)malloc(sizeof(Mat4x4));
-    float tmp[4][4] = {
-        { cos(theta * 0.8f), sin(theta * 0.8f), 0.0f, 0.0f},
-        {-sin(theta * 0.8f), cos(theta * 0.8f), 0.0f, 0.0f},
-        {              0.0f,        0.0f, 1.0f, 0.0f},
-        {              0.0f,        0.0f, 0.0f, 1.0f}
-    };
-    memcpy(rot->m, tmp, sizeof(tmp));
+Mat4x4* Mat4x4_RotY_new(float theta, float vel) {
+    /*
+     * Rotate a 3d vector around the y-axis, also called 'pitch'
+     * See Mat4x4_RotX_new function for reference on linear algebra theory.
+     */
+    Mat4x4* rot = Mat4x4_Identity();
+    if (vel != 0.0f) {
+        float tmp[4][4] = {
+            {  cos(theta * vel), 0.0f, sin(theta * vel), 0.0f},
+            {              0.0f, 1.0f,             0.0f, 0.0f},
+            { -sin(theta * vel), 0.0f, cos(theta * vel), 0.0f},
+            {              0.0f, 0.0f,             0.0f, 1.0f}};
+        memcpy(rot->m, tmp, sizeof(tmp));
+    }
+    return rot;
+}
+
+Mat4x4* Mat4x4_RotZ_new(float theta, float vel) {
+    /*
+     * Rotate a 3d vector around the z-axis, also called 'yaw'
+     * See Mat4x4_RotX_new function for source on linear algebra theory.
+     */
+    Mat4x4* rot = Mat4x4_Identity();
+    if (vel != 0.0f) {
+        float tmp[4][4] = {
+            {cos(theta * vel), -sin(theta * vel), 0.0f, 0.0f},
+            {sin(theta * vel),  cos(theta * vel), 0.0f, 0.0f},
+            {            0.0f,              0.0f, 1.0f, 0.0f},
+            {            0.0f,              0.0f, 0.0f, 1.0f}};
+        memcpy(rot->m, tmp, sizeof(tmp));
+    }
     return rot;
 }
 

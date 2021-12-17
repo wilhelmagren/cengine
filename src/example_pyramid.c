@@ -12,27 +12,18 @@
 int main(int argc, char** argv) {
 
     Vec3d* a = Vec3d_new(0.0f, 0.0f, 0.0f);
-    Vec3d* b = Vec3d_new(0.0f, 1.0f, 0.0f);
-    Vec3d* c = Vec3d_new(1.0f, 1.0f, 0.0f);
-    Vec3d* d = Vec3d_new(1.0f, 0.0f, 0.0f);
-    Vec3d* e = Vec3d_new(0.0f, 0.0f, 1.0f);
-    Vec3d* f = Vec3d_new(0.0f, 1.0f, 1.0f);
-    Vec3d* g = Vec3d_new(1.0f, 1.0f, 1.0f);
-    Vec3d* h = Vec3d_new(1.0f, 0.0f, 1.0f);
+    Vec3d* b = Vec3d_new(0.5f, 1.0f, 0.5f);
+    Vec3d* c = Vec3d_new(1.0f, 0.0f, 0.0f);
+    Vec3d* d = Vec3d_new(0.0f, 0.0f, 1.0f);
+    Vec3d* e = Vec3d_new(1.0f, 0.0f, 1.0f);
 
     Polygon* p1 = Polygon_new(a, b, c);
-    Polygon* p2 = Polygon_new(a, c, d);
-    Polygon* p3 = Polygon_new(d, c, g);
-    Polygon* p4 = Polygon_new(d, g, h);
-    Polygon* p5 = Polygon_new(h, g, f);
-    Polygon* p6 = Polygon_new(h, f, e);
-    Polygon* p7 = Polygon_new(e, f, b);
-    Polygon* p8 = Polygon_new(e, b, a);
-    Polygon* p9 = Polygon_new(b, f, g);
-    Polygon* p10 = Polygon_new(b, g, c);
-    Polygon* p11 = Polygon_new(e, a, d);
-    Polygon* p12 = Polygon_new(e, d, h);
-
+    Polygon* p2 = Polygon_new(c, b, e);
+    Polygon* p3 = Polygon_new(d, b, a);
+    Polygon* p4 = Polygon_new(e, b, d);
+    Polygon* p5 = Polygon_new(d, a, c);
+    Polygon* p6 = Polygon_new(d, c, e);
+    
     Mesh* mesh = Mesh_new();
     Mesh_add(mesh, p1);
     Mesh_add(mesh, p2);
@@ -40,19 +31,12 @@ int main(int argc, char** argv) {
     Mesh_add(mesh, p4);
     Mesh_add(mesh, p5);
     Mesh_add(mesh, p6);
-    Mesh_add(mesh, p7);
-    Mesh_add(mesh, p8);
-    Mesh_add(mesh, p9);
-    Mesh_add(mesh, p10);
-    Mesh_add(mesh, p11);
-    Mesh_add(mesh, p12);
 
     Mesh_print(mesh);
-
+ 
     float zn = 1.0f, zf = 10000.0f;
     float fov = 100.0f, ratio = (float)WINDOW_H/(float)WINDOW_W;
     Mat4x4* proj = Mat4x4_Proj_new(zn, zf, fov, ratio);
-    Mat4x4_print(proj, "Mat4x4Proj");
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Could not initialize SDL: %s\n", SDL_GetError());
@@ -73,22 +57,28 @@ int main(int argc, char** argv) {
     }
 
     SDL_bool quit = SDL_FALSE;
-    float counter = 0;
+    float theta = 0.0f, dtheta = 2.0f / (float)FPS_TARGET;
+    float velX = 0.3f, velY = 0.0f, velZ = 0.5f;
     float desired_ms = 1000.0f / (float) FPS_TARGET;
+    printf("target fps: %d, target frame render-time: %f ms\n", FPS_TARGET, desired_ms);
+    printf("velocities: (x=%0.2f, y=%0.2f, z=%0.2f)\n", velX, velY, velZ);
+    printf("frame theta update=%0.2f\n", dtheta);
+
     while (!quit) {
-        counter += 0.05f;
-        if (counter >= 360.0f) {
-            counter = 0;
+        theta += dtheta;
+        if (theta >= 360.0f) {
+            theta = 0.0f;
         }
         uint64_t t_start = SDL_GetPerformanceCounter();
-        Mat4x4* rotX = Mat4x4_RotX_new(counter);
-        Mat4x4* rotZ = Mat4x4_RotZ_new(counter);
+        Mat4x4* rotX = Mat4x4_RotX_new(theta, velX);
+        Mat4x4* rotY = Mat4x4_RotY_new(theta, velY);
+        Mat4x4* rotZ = Mat4x4_RotZ_new(theta, velZ);
 
         SDL_Event event;
         SDL_RenderSetLogicalSize(renderer, 0, 0);
         SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
         SDL_RenderClear(renderer);
-        Draw_mesh(renderer, mesh, proj, rotX, rotZ, WHITE);
+        Draw_mesh(renderer, mesh, proj, rotX, rotY, rotZ, WHITE);
         SDL_RenderPresent(renderer);
 
         while (SDL_PollEvent(&event)) {
@@ -96,18 +86,20 @@ int main(int argc, char** argv) {
                 quit = SDL_TRUE;
             }
         }
-        free(rotX);
-        free(rotZ);
+
         uint64_t t_end = SDL_GetPerformanceCounter();
         float ms_elapsed = (float)(t_end-t_start)/(float)SDL_GetPerformanceFrequency()*1000.0f;
         float delay = desired_ms - ms_elapsed;
         if (delay <= 0.0f) {
-            printf("Frame rendering time: %0.06f ms, target FPS: %d, skipping delay...",
-                    ms_elapsed, FPS_TARGET);
+            printf("no delay, current frame %0.3f ms behind target render-time...\n", delay);
         } else {
-            printf("Frame rendering time: %0.6f ms, target FPS: %d, delaying %0.6f ms. Theta=%0.2f\n", ms_elapsed, FPS_TARGET, delay, counter);
-            SDL_Delay(floor(delay));
+            SDL_Delay(fmax(0.0f, delay));
         }
+
+        free(rotX);
+        free(rotY);
+        free(rotZ);
+
     }
 
     SDL_DestroyRenderer(renderer);
