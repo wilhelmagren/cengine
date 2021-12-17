@@ -35,18 +35,18 @@ int main(int argc, char** argv) {
     Polygon* p12 = Polygon_new(e, d, h);
 
     Mesh* mesh = Mesh_new();
-    Mesh_add(mesh, p1);
-    Mesh_add(mesh, p2);
-    Mesh_add(mesh, p3);
-    Mesh_add(mesh, p4);
-    Mesh_add(mesh, p5);
-    Mesh_add(mesh, p6);
-    Mesh_add(mesh, p7);
-    Mesh_add(mesh, p8);
-    Mesh_add(mesh, p9);
-    Mesh_add(mesh, p10);
-    Mesh_add(mesh, p11);
-    Mesh_add(mesh, p12);
+    Mesh_push(mesh, p1);
+    Mesh_push(mesh, p2);
+    Mesh_push(mesh, p3);
+    Mesh_push(mesh, p4);
+    Mesh_push(mesh, p5);
+    Mesh_push(mesh, p6);
+    Mesh_push(mesh, p7);
+    Mesh_push(mesh, p8);
+    Mesh_push(mesh, p9);
+    Mesh_push(mesh, p10);
+    Mesh_push(mesh, p11);
+    Mesh_push(mesh, p12);
 
     Mesh_print(mesh);
 
