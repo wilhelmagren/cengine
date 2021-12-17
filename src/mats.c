@@ -37,7 +37,7 @@ Mat4x4* Mat4x4_Ones() {
     return mat;
 };
 
-Mat4x4* Mat4x4_Proj_new(float zn, float zf, float fov, float ratio) {
+Mat4x4* Mat4x4_Proj(float zn, float zf, float fov, float ratio) {
     // Convert the fov from degrees to radians and calculate
     // scaling in z-direction based on zn & zf
     Mat4x4* proj = (Mat4x4*)malloc(sizeof(Mat4x4));
@@ -53,7 +53,7 @@ Mat4x4* Mat4x4_Proj_new(float zn, float zf, float fov, float ratio) {
     return proj;
 }
 
-Mat4x4* Mat4x4_RotX_new(float theta, float vel) {
+Mat4x4* Mat4x4_RotX(float theta, float vel) {
     /*
      * Rotate a 3d vector around the x-axis, also called 'roll'
      * Based on the 3x3 matrix found at: https://en.wikipedia.org/wiki/Rotation_matrix
@@ -71,7 +71,7 @@ Mat4x4* Mat4x4_RotX_new(float theta, float vel) {
     return rot;
 }
 
-Mat4x4* Mat4x4_RotY_new(float theta, float vel) {
+Mat4x4* Mat4x4_RotY(float theta, float vel) {
     /*
      * Rotate a 3d vector around the y-axis, also called 'pitch'
      * See Mat4x4_RotX_new function for reference on linear algebra theory.
@@ -88,7 +88,7 @@ Mat4x4* Mat4x4_RotY_new(float theta, float vel) {
     return rot;
 }
 
-Mat4x4* Mat4x4_RotZ_new(float theta, float vel) {
+Mat4x4* Mat4x4_RotZ(float theta, float vel) {
     /*
      * Rotate a 3d vector around the z-axis, also called 'yaw'
      * See Mat4x4_RotX_new function for source on linear algebra theory.
