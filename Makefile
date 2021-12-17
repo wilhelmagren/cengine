@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall
+CFLAGS = -Wall -Werror
 LDFLAGS = -lSDL2 -lm
 
 OBJFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/mats.o
