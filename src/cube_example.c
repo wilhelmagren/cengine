@@ -100,12 +100,13 @@ int main(int argc, char** argv) {
         free(rotZ);
         uint64_t t_end = SDL_GetPerformanceCounter();
         float ms_elapsed = (float)(t_end-t_start)/(float)SDL_GetPerformanceFrequency()*1000.0f;
-        if (ms_elapsed <= 0.0f) {
+        float delay = desired_ms - ms_elapsed;
+        if (delay <= 0.0f) {
             printf("Frame rendering time: %0.06f ms, target FPS: %d, skipping delay...",
                     ms_elapsed, FPS_TARGET);
         } else {
-            printf("Frame rendering time: %0.6f ms, target FPS: %d, delaying %0.6f ms. Theta=%0.2f\n", ms_elapsed, FPS_TARGET, desired_ms-ms_elapsed, counter);
-            SDL_Delay(floor(desired_ms - ms_elapsed));
+            printf("Frame rendering time: %0.6f ms, target FPS: %d, delaying %0.6f ms. Theta=%0.2f\n", ms_elapsed, FPS_TARGET, delay, counter);
+            SDL_Delay(floor(delay));
         }
     }
 

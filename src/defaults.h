@@ -7,7 +7,7 @@
 #define WINDOW_H 800
 #define WINDOW_OPACITY 200
 
-#define FPS_TARGET 40
+#define FPS_TARGET 60
 /*
  * Mesh buffer default size
  */
