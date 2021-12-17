@@ -8,6 +8,7 @@
 #include "polygon.h"
 #include "mesh.h"
 #include "draw.h"
+#include "color.h"
 
 
 int main(int argc, char** argv) {

@@ -8,6 +8,7 @@
 #include "polygon.h"
 #include "mesh.h"
 #include "draw.h"
+#include "color.h"
 
 int main(int argc, char** argv) {
 
@@ -59,7 +60,7 @@ int main(int argc, char** argv) {
     SDL_bool quit = SDL_FALSE;
     float theta = 0.0f, dtheta = 2.0f / (float)FPS_TARGET;
     float velX = 0.5f, velY = 0.0f, velZ = 1.0f;
-    float desired_ms = 1000.0f / (float) FPS_TARGET;
+    float desired_ms = 1000.0f / (float)FPS_TARGET;
     printf("target fps: %d, target frame render-time: %f ms\n", FPS_TARGET, desired_ms);
     printf("velocities: (x=%0.2f, y=%0.2f, z=%0.2f)\n", velX, velY, velZ);
     printf("frame theta update=%0.2f\n", dtheta);

@@ -1,6 +1,6 @@
 #include "draw.h"
 
-void Draw_polygon(SDL_Renderer* renderer, Polygon* poly, uint8_t color[]) {
+void Draw_polygon(SDL_Renderer* renderer, Polygon* poly, const uint8_t color[]) {
     // x1,y1,x2,y2
     int i;
     SDL_SetRenderDrawColor(renderer, color[0], color[1], color[2], 255);
@@ -13,7 +13,7 @@ void Draw_polygon(SDL_Renderer* renderer, Polygon* poly, uint8_t color[]) {
     }
 }
 
-void Draw_mesh(SDL_Renderer* renderer, Mesh* m, Mat4x4* proj, Mat4x4* rotX, Mat4x4* rotY, Mat4x4* rotZ, uint8_t color[]) {
+void Draw_mesh(SDL_Renderer* renderer, Mesh* m, Mat4x4* proj, Mat4x4* rotX, Mat4x4* rotY, Mat4x4* rotZ, const uint8_t color[]) {
     int i;
     for (i = 0; i < m->pidx; i++) {
         Vec3d* projVec1 = Vec3d_new(0.0f, 0.0f, 0.0f);
