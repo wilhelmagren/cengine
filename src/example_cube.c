@@ -9,6 +9,7 @@
 #include "mesh.h"
 #include "draw.h"
 
+
 int main(int argc, char** argv) {
 
     Vec3d* a = Vec3d_new(0.0f, 0.0f, 0.0f);
@@ -34,24 +35,24 @@ int main(int argc, char** argv) {
     Polygon* p12 = Polygon_new(e, d, h);
 
     Mesh* mesh = Mesh_new();
-    Mesh_add(mesh, p1);
-    Mesh_add(mesh, p2);
-    Mesh_add(mesh, p3);
-    Mesh_add(mesh, p4);
-    Mesh_add(mesh, p5);
-    Mesh_add(mesh, p6);
-    Mesh_add(mesh, p7);
-    Mesh_add(mesh, p8);
-    Mesh_add(mesh, p9);
-    Mesh_add(mesh, p10);
-    Mesh_add(mesh, p11);
-    Mesh_add(mesh, p12);
+    Mesh_push(mesh, p1);
+    Mesh_push(mesh, p2);
+    Mesh_push(mesh, p3);
+    Mesh_push(mesh, p4);
+    Mesh_push(mesh, p5);
+    Mesh_push(mesh, p6);
+    Mesh_push(mesh, p7);
+    Mesh_push(mesh, p8);
+    Mesh_push(mesh, p9);
+    Mesh_push(mesh, p10);
+    Mesh_push(mesh, p11);
+    Mesh_push(mesh, p12);
 
     Mesh_print(mesh);
 
-    float zn = 1.0f, zf = 10000.0f;
-    float fov = 100.0f, ratio = (float)WINDOW_H/(float)WINDOW_W;
-    Mat4x4* proj = Mat4x4_Proj_new(zn, zf, fov, ratio);
+    float zn = 0.1f, zf = 10000.0f;
+    float fov = 70.0f, ratio = (float)WINDOW_H/(float)WINDOW_W;
+    Mat4x4* proj = Mat4x4_Proj(zn, zf, fov, ratio);
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Could not initialize SDL: %s\n", SDL_GetError());
@@ -86,9 +87,9 @@ int main(int argc, char** argv) {
             theta = 0.0f;
         }
         uint64_t t_start = SDL_GetPerformanceCounter();
-        Mat4x4* rotX = Mat4x4_RotX_new(theta, velX);
-        Mat4x4* rotY = Mat4x4_RotY_new(theta, velY);
-        Mat4x4* rotZ = Mat4x4_RotZ_new(theta, velZ);
+        Mat4x4* rotX = Mat4x4_RotX(theta, velX);
+        Mat4x4* rotY = Mat4x4_RotY(theta, velY);
+        Mat4x4* rotZ = Mat4x4_RotZ(theta, velZ);
 
         SDL_Event event;
         SDL_RenderSetLogicalSize(renderer, 0, 0);

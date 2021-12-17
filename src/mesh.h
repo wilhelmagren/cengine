@@ -10,7 +10,8 @@ typedef struct {
 } Mesh;
 
 Mesh* Mesh_new();
+void Mesh_push(Mesh* m, Polygon* poly);
+Polygon* Mesh_pop(Mesh* m);
 void Mesh_print(Mesh* m);
-void Mesh_add(Mesh* m, Polygon* poly);
 
 #endif 
