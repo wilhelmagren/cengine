@@ -11,20 +11,15 @@ EXAMPLE_CUBE = cube
 EXAMPLE_PYRAMID = pyramid
 
 $(EXAMPLE_PYRAMID): $(PYRAMIDFILES)
+	@echo "\e[0;32m[*]\e[0m  Compiling binary for $(EXAMPLE_PYRAMID) example..."
 	$(CC) -o $(EXAMPLE_PYRAMID) $(PYRAMIDFILES) $(CFLAGS) $(LDFLAGS)
-	@rm -f $(PYRAMIDFILES) *~
-	@echo "\e[0;32m[*]\e[0m  compilation for $(EXAMPLE_PYRAMID) done, removing obj files..."
 
 $(EXAMPLE_CUBE): $(CUBEFILES)
+	@echo "\e[0;32m[*]\e[0m  Compiling binary for $(EXAMPLE_CUBE) example..."
 	$(CC) -o $(EXAMPLE_CUBE) $(CUBEFILES) $(CFLAGS) $(LDFLAGS)
-	@rm -f $(CUBEFILES) *~
-	@echo "\e[0;32m[*]\e[0m  compilation for $(EXAMPLE_CUBE) done, removing obj files..."
 
 $(TARGET): $(OBJFILES)
 	$(CC) -o $(TARGET) $(OBJFILES) $(CFLAGS) $(LDFLAGS)
-	@rm -f $(OBJFILES) *~
-	@echo "\e[0;32m[*]\e[0m  compilation for $(TARGET) done, removing obj files..."
-
 
 clean:
 	@rm -f $(OBJFILES) $(TARGET) *~

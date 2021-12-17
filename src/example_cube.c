@@ -9,6 +9,7 @@
 #include "mesh.h"
 #include "draw.h"
 
+
 int main(int argc, char** argv) {
 
     Vec3d* a = Vec3d_new(0.0f, 0.0f, 0.0f);
@@ -49,8 +50,8 @@ int main(int argc, char** argv) {
 
     Mesh_print(mesh);
 
-    float zn = 1.0f, zf = 10000.0f;
-    float fov = 100.0f, ratio = (float)WINDOW_H/(float)WINDOW_W;
+    float zn = 0.1f, zf = 10000.0f;
+    float fov = 70.0f, ratio = (float)WINDOW_H/(float)WINDOW_W;
     Mat4x4* proj = Mat4x4_Proj_new(zn, zf, fov, ratio);
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
