@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
 
     float zn = 0.1f, zf = 10000.0f;
     float fov = 70.0f, ratio = (float)WINDOW_H/(float)WINDOW_W;
-    Mat4x4* proj = Mat4x4_Proj_new(zn, zf, fov, ratio);
+    Mat4x4* proj = Mat4x4_Proj(zn, zf, fov, ratio);
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Could not initialize SDL: %s\n", SDL_GetError());
@@ -87,9 +87,9 @@ int main(int argc, char** argv) {
             theta = 0.0f;
         }
         uint64_t t_start = SDL_GetPerformanceCounter();
-        Mat4x4* rotX = Mat4x4_RotX_new(theta, velX);
-        Mat4x4* rotY = Mat4x4_RotY_new(theta, velY);
-        Mat4x4* rotZ = Mat4x4_RotZ_new(theta, velZ);
+        Mat4x4* rotX = Mat4x4_RotX(theta, velX);
+        Mat4x4* rotY = Mat4x4_RotY(theta, velY);
+        Mat4x4* rotZ = Mat4x4_RotZ(theta, velZ);
 
         SDL_Event event;
         SDL_RenderSetLogicalSize(renderer, 0, 0);
