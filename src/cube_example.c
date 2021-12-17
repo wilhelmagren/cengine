@@ -51,8 +51,8 @@ int main(int argc, char** argv) {
 
     float zn = 1.0f, zf = 10000.0f;
     float fov = 100.0f, ratio = (float)WINDOW_H/(float)WINDOW_W;
-    MatProj* proj = MatProj_new(zn, zf, fov, ratio);
-    MatProj_print(proj);
+    Mat4x4* proj = Mat4x4_Proj_new(zn, zf, fov, ratio);
+    Mat4x4_print(proj, "Mat4x4Proj");
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Could not initialize SDL: %s\n", SDL_GetError());
@@ -81,14 +81,14 @@ int main(int argc, char** argv) {
             counter = 0;
         }
         uint64_t t_start = SDL_GetPerformanceCounter();
-        MatRotX* rotX = MatRotX_new(counter);
-        MatRotZ* rotZ = MatRotZ_new(counter);
+        Mat4x4* rotX = Mat4x4_RotX_new(counter);
+        Mat4x4* rotZ = Mat4x4_RotZ_new(counter);
 
         SDL_Event event;
         SDL_RenderSetLogicalSize(renderer, 0, 0);
         SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
         SDL_RenderClear(renderer);
-        Draw_mesh(renderer, mesh, proj->mat, rotX->mat, rotZ->mat, WHITE);
+        Draw_mesh(renderer, mesh, proj, rotX, rotZ, WHITE);
         SDL_RenderPresent(renderer);
 
         while (SDL_PollEvent(&event)) {
