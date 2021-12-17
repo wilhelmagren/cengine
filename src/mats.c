@@ -16,26 +16,12 @@ Mat4x4* Mat4x4_new() {
     return mat;
 }
 
-void Mat4x4_print(Mat4x4* mat) {
-    char* string = "<struct Mat4x4 at %p>\n";
-    printf(string, mat);
-    int i;
-    for (i = 0; i < 4; i++) {
-        char* values = "| %0.3f %0.3f %0.3f %0.3f |\n";
-        printf(values,
-                mat->m[i][0], mat->m[i][1],
-                mat->m[i][2], mat->m[i][3]);
-    }
-}
-
-
-MatProj* MatProj_new(float zn, float zf, float fov, float ratio) {
+Mat4x4* Mat4x4_Proj_new(float zn, float zf, float fov, float ratio) {
     // Convert the fov from degrees to radians and calculate
     // scaling in z-direction based on zn & zf
+    Mat4x4* proj = (Mat4x4*)malloc(sizeof(Mat4x4));
     float fov_rad = (float) 1.0f / tan(fov * .5f / 180.f * 3.141592f);
     float z_scale = (float) zf / (zf-zn);
-    Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));
-    MatProj* proj = (MatProj*)malloc(sizeof(MatProj));
     float x_scale = ratio*fov_rad;
     float tmp[4][4] = {
         {x_scale,  0.0f,        0.0f,  0.0f},
@@ -43,48 +29,31 @@ MatProj* MatProj_new(float zn, float zf, float fov, float ratio) {
         {0.0f,     0.0f,     z_scale,  1.0f},
         {0.0f,     0.0f, -zn*z_scale,  0.0f}
     };
-    memcpy(mat->m, tmp, sizeof(tmp));
-    proj->mat = mat;
+    memcpy(proj->m, tmp, sizeof(tmp));
     return proj;
 }
 
-void MatProj_print(MatProj* proj) {
-    char* string = "<struct MatProj at %p>\n";
-    printf(string, proj);
-    int i;
-    for (i = 0; i < 4; i++) {
-        char* values = "| %0.3f %0.3f %0.3f %0.3f |\n";
-        printf(values,
-                proj->mat->m[i][0], proj->mat->m[i][1],
-                proj->mat->m[i][2], proj->mat->m[i][3]);
-    }
-};
-
-MatRotX* MatRotX_new(float theta) {
-    Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));
-    MatRotX* rot = (MatRotX*)malloc(sizeof(MatRotX));
+Mat4x4* Mat4x4_RotX_new(float theta) {
+    Mat4x4* rot = (Mat4x4*)malloc(sizeof(Mat4x4));
     float tmp[4][4] = {
         {1.0f,               0.0f,              0.0f, 0.0f},
         {0.0f,  cos(theta * 0.5f), sin(theta * 0.5f), 0.0f},
         {0.0f, -sin(theta * 0.5f), cos(theta * 0.5f), 0.0f},
         {0.0f,               0.0f,              0.0f, 1.0f}
     };
-    memcpy(mat->m, tmp, sizeof(tmp));
-    rot->mat = mat;
+    memcpy(rot->m, tmp, sizeof(tmp));
     return rot;
 }
 
-MatRotZ* MatRotZ_new(float theta) {
-    Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));
-    MatRotZ* rot = (MatRotZ*)malloc(sizeof(MatRotZ));
+Mat4x4* Mat4x4_RotZ_new(float theta) {
+    Mat4x4* rot = (Mat4x4*)malloc(sizeof(Mat4x4));
     float tmp[4][4] = {
-        { cos(theta), sin(theta), 0.0f, 0.0f},
-        {-sin(theta), cos(theta), 0.0f, 0.0f},
-        {       0.0f,       0.0f, 1.0f, 0.0f},
-        {       0.0f,       0.0f, 0.0f, 1.0f}
+        { cos(theta * 0.8f), sin(theta * 0.8f), 0.0f, 0.0f},
+        {-sin(theta * 0.8f), cos(theta * 0.8f), 0.0f, 0.0f},
+        {              0.0f,        0.0f, 1.0f, 0.0f},
+        {              0.0f,        0.0f, 0.0f, 1.0f}
     };
-    memcpy(mat->m, tmp, sizeof(tmp));
-    rot->mat = mat;
+    memcpy(rot->m, tmp, sizeof(tmp));
     return rot;
 }
 
@@ -99,6 +68,18 @@ void MatMul(Vec3d* vec, Mat4x4* mat, Vec3d* res) {
         res->x /= w;
         res->y /= w;
         res->z /= w;
+    }
+}
+
+void Mat4x4_print(Mat4x4* mat, char* name) {
+    char* string = "<struct %s at %p>\n";
+    printf(string, name, mat);
+    int i;
+    for (i = 0; i < 4; i++) {
+        char* values = "| %0.3f %0.3f %0.3f %0.3f |\n";
+        printf(values,
+                mat->m[i][0], mat->m[i][1],
+                mat->m[i][2], mat->m[i][3]);
     }
 }
 
