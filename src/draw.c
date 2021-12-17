@@ -13,7 +13,7 @@ void Draw_polygon(SDL_Renderer* renderer, Polygon* poly, uint8_t color[]) {
     }
 }
 
-void Draw_mesh(SDL_Renderer* renderer, Mesh* m, Mat4x4* proj, Mat4x4* rotX, Mat4x4* rotZ, uint8_t color[]) {
+void Draw_mesh(SDL_Renderer* renderer, Mesh* m, Mat4x4* proj, Mat4x4* rotX, Mat4x4* rotY, Mat4x4* rotZ, uint8_t color[]) {
     int i;
     for (i = 0; i < m->pidx; i++) {
         Vec3d* projVec1 = Vec3d_new(0.0f, 0.0f, 0.0f);
@@ -25,6 +25,10 @@ void Draw_mesh(SDL_Renderer* renderer, Mesh* m, Mat4x4* proj, Mat4x4* rotX, Mat4
         MatMul(m->polygons[i]->vecs[0], rotZ, projected->vecs[0]);
         MatMul(m->polygons[i]->vecs[1], rotZ, projected->vecs[1]);
         MatMul(m->polygons[i]->vecs[2], rotZ, projected->vecs[2]);
+
+        MatMul(projected->vecs[0], rotY, projected->vecs[0]);
+        MatMul(projected->vecs[1], rotY, projected->vecs[1]);
+        MatMul(projected->vecs[2], rotY, projected->vecs[2]);
 
         MatMul(projected->vecs[0], rotX, projected->vecs[0]);
         MatMul(projected->vecs[1], rotX, projected->vecs[1]);

@@ -52,7 +52,6 @@ int main(int argc, char** argv) {
     float zn = 1.0f, zf = 10000.0f;
     float fov = 100.0f, ratio = (float)WINDOW_H/(float)WINDOW_W;
     Mat4x4* proj = Mat4x4_Proj_new(zn, zf, fov, ratio);
-    Mat4x4_print(proj, "Mat4x4Proj");
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Could not initialize SDL: %s\n", SDL_GetError());
@@ -74,21 +73,25 @@ int main(int argc, char** argv) {
 
     SDL_bool quit = SDL_FALSE;
     float counter = 0;
+    float velX = 0.5f;
+    float velY = 0.0f;
+    float velZ = 0.2f;
     float desired_ms = 1000.0f / (float) FPS_TARGET;
     while (!quit) {
-        counter += 0.05f;
+        counter += 0.1f;
         if (counter >= 360.0f) {
-            counter = 0;
+            counter = 0.0f;
         }
         uint64_t t_start = SDL_GetPerformanceCounter();
-        Mat4x4* rotX = Mat4x4_RotX_new(counter);
-        Mat4x4* rotZ = Mat4x4_RotZ_new(counter);
+        Mat4x4* rotX = Mat4x4_RotX_new(counter, velX);
+        Mat4x4* rotY = Mat4x4_RotY_new(counter, velY);
+        Mat4x4* rotZ = Mat4x4_RotZ_new(counter, velZ);
 
         SDL_Event event;
         SDL_RenderSetLogicalSize(renderer, 0, 0);
         SDL_SetRenderDrawColor(renderer, 40, 40, 40, 255);
         SDL_RenderClear(renderer);
-        Draw_mesh(renderer, mesh, proj, rotX, rotZ, WHITE);
+        Draw_mesh(renderer, mesh, proj, rotX, rotY, rotZ, WHITE);
         SDL_RenderPresent(renderer);
 
         while (SDL_PollEvent(&event)) {
@@ -96,18 +99,15 @@ int main(int argc, char** argv) {
                 quit = SDL_TRUE;
             }
         }
+
         free(rotX);
+        free(rotY);
         free(rotZ);
         uint64_t t_end = SDL_GetPerformanceCounter();
         float ms_elapsed = (float)(t_end-t_start)/(float)SDL_GetPerformanceFrequency()*1000.0f;
         float delay = desired_ms - ms_elapsed;
-        if (delay <= 0.0f) {
-            printf("Frame rendering time: %0.06f ms, target FPS: %d, skipping delay...",
-                    ms_elapsed, FPS_TARGET);
-        } else {
-            printf("Frame rendering time: %0.6f ms, target FPS: %d, delaying %0.6f ms. Theta=%0.2f\n", ms_elapsed, FPS_TARGET, delay, counter);
-            SDL_Delay(floor(delay));
-        }
+        SDL_Delay(fmax(0.0f, delay));
+
     }
 
     SDL_DestroyRenderer(renderer);
