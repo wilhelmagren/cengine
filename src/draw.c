@@ -16,9 +16,9 @@ void Draw_polygon(SDL_Renderer* renderer, Polygon* poly, const uint8_t color[]) 
 void Draw_mesh(SDL_Renderer* renderer, Mesh* m, Mat4x4* proj, Mat4x4* rotX, Mat4x4* rotY, Mat4x4* rotZ, const uint8_t color[]) {
     int i;
     for (i = 0; i < m->pidx; i++) {
-        Vec3d* projVec1 = Vec3d_new(0.0f, 0.0f, 0.0f);
-        Vec3d* projVec2 = Vec3d_new(0.0f, 0.0f, 0.0f);
-        Vec3d* projVec3 = Vec3d_new(0.0f, 0.0f, 0.0f);
+        Vec3* projVec1 = Vec3_new(0.0f, 0.0f, 0.0f);
+        Vec3* projVec2 = Vec3_new(0.0f, 0.0f, 0.0f);
+        Vec3* projVec3 = Vec3_new(0.0f, 0.0f, 0.0f);
 
         Polygon* projected = Polygon_new(projVec1, projVec2, projVec3);
 

@@ -17,39 +17,25 @@ Mat4x4* Mat4x4_Identity() {
 
 Mat4x4* Mat4x4_Zeros() {
     Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));
-    float tmp[4][4] = {
-        {0.0f, 0.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f, 0.0f}};
-    memcpy(mat->m, tmp, sizeof(tmp));
+    memset(mat->m, 0.0f, sizeof(mat->m));
     return mat;
 };
 
 Mat4x4* Mat4x4_Ones() {
     Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));
-    float tmp[4][4] = {
-        {1.0f, 1.0f, 1.0f, 1.0f},
-        {1.0f, 1.0f, 1.0f, 1.0f},
-        {1.0f, 1.0f, 1.0f, 1.0f},
-        {1.0f, 1.0f, 1.0f, 1.0f}};
-    memcpy(mat->m, tmp, sizeof(tmp));
+    memset(mat->m, 1.0f, sizeof(mat->m));
     return mat;
 };
 
 Mat4x4* Mat4x4_Proj(float zn, float zf, float fov, float ratio) {
     // Convert the fov from degrees to radians and calculate
     // scaling in z-direction based on zn & zf
-    Mat4x4* proj = (Mat4x4*)malloc(sizeof(Mat4x4));
-    float fov_rad = (float) 1.0f / tan(fov * 0.5f / 180.f * 3.141592f);
-    float z_scale = (float) zf / (zf-zn);
-    float x_scale = ratio*fov_rad;
-    float tmp[4][4] = {
-        {x_scale,  0.0f,        0.0f,  0.0f},
-        {0.0f,  fov_rad,        0.0f,  0.0f},
-        {0.0f,     0.0f,     z_scale,  1.0f},
-        {0.0f,     0.0f, -zn*z_scale,  0.0f}};
-    memcpy(proj->m, tmp, sizeof(tmp));
+    Mat4x4* proj = Mat4x4_Zeros();
+    proj->m[0][0] = (float) ratio * 1.0f / tan(fov * 0.5f / 180.f * 3.141592f);
+    proj->m[1][1] = (float) 1.0f / tan(fov * 0.5f / 180.f * 3.141592f);
+    proj->m[2][2] = (float) zf / (zf-zn);
+    proj->m[3][2] = (float) -zn*zf / (zf-zn);
+    proj->m[2][3] = 1.0f;
     return proj;
 }
 
@@ -57,16 +43,14 @@ Mat4x4* Mat4x4_RotX(float theta, float vel) {
     /*
      * Rotate a 3d vector around the x-axis, also called 'roll'
      * Based on the 3x3 matrix found at: https://en.wikipedia.org/wiki/Rotation_matrix
-     * but modified to deal with our added bias to the position Vec3d vector.
+     * but modified to deal with our added bias to the position Vec3 vector.
      */
     Mat4x4* rot = Mat4x4_Identity();
     if (vel != 0.0f) {
-        float tmp[4][4] = {
-            {1.0f,             0.0f,              0.0f, 0.0f},
-            {0.0f, cos(theta * vel), -sin(theta * vel), 0.0f},
-            {0.0f, sin(theta * vel),  cos(theta * vel), 0.0f},
-            {0.0f,             0.0f,              0.0f, 1.0f}};
-        memcpy(rot->m, tmp, sizeof(tmp));
+        rot->m[1][1] = cos(theta * vel);
+        rot->m[1][2] = -sin(theta * vel);
+        rot->m[2][1] = sin(theta * vel);
+        rot->m[2][2] = cos(theta * vel);
     }
     return rot;
 }
@@ -78,12 +62,10 @@ Mat4x4* Mat4x4_RotY(float theta, float vel) {
      */
     Mat4x4* rot = Mat4x4_Identity();
     if (vel != 0.0f) {
-        float tmp[4][4] = {
-            {  cos(theta * vel), 0.0f, sin(theta * vel), 0.0f},
-            {              0.0f, 1.0f,             0.0f, 0.0f},
-            { -sin(theta * vel), 0.0f, cos(theta * vel), 0.0f},
-            {              0.0f, 0.0f,             0.0f, 1.0f}};
-        memcpy(rot->m, tmp, sizeof(tmp));
+        rot->m[0][0] = cos(theta * vel);
+        rot->m[0][2] = sin(theta * vel);
+        rot->m[2][0] = -sin(theta * vel);
+        rot->m[2][2] = cos(theta * vel);
     }
     return rot;
 }
@@ -95,17 +77,15 @@ Mat4x4* Mat4x4_RotZ(float theta, float vel) {
      */
     Mat4x4* rot = Mat4x4_Identity();
     if (vel != 0.0f) {
-        float tmp[4][4] = {
-            {cos(theta * vel), -sin(theta * vel), 0.0f, 0.0f},
-            {sin(theta * vel),  cos(theta * vel), 0.0f, 0.0f},
-            {            0.0f,              0.0f, 1.0f, 0.0f},
-            {            0.0f,              0.0f, 0.0f, 1.0f}};
-        memcpy(rot->m, tmp, sizeof(tmp));
+        rot->m[0][0] = cos(theta * vel);
+        rot->m[0][1] = -sin(theta * vel);
+        rot->m[1][0] = sin(theta * vel);
+        rot->m[1][1] = cos(theta * vel);
     }
     return rot;
 }
 
-void MatMul(Vec3d* vec, Mat4x4* mat, Vec3d* res) {
+void MatMul(Vec3* vec, Mat4x4* mat, Vec3* res) {
     float x = vec->x, y = vec->y, z = vec->z;
     res->x = x*mat->m[0][0] + y*mat->m[1][0] + z*mat->m[2][0] + mat->m[3][0];
     res->y = x*mat->m[0][1] + y*mat->m[1][1] + z*mat->m[2][1] + mat->m[3][1];

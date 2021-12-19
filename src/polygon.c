@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "polygon.h"
 
-Polygon* Polygon_new(Vec3d* u, Vec3d* v, Vec3d* w) {
+Polygon* Polygon_new(Vec3* u, Vec3* v, Vec3* w) {
     Polygon* poly = (Polygon*)malloc(sizeof(Polygon));
     poly->vecs[0] = u;
     poly->vecs[1] = v;

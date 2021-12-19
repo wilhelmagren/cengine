@@ -4,10 +4,10 @@
 
 
 typedef struct {
-    Vec3d* vecs[3];
+    Vec3* vecs[3];
 } Polygon;
 
-Polygon* Polygon_new(Vec3d* u, Vec3d* v, Vec3d* w);
+Polygon* Polygon_new(Vec3* u, Vec3* v, Vec3* w);
 void Polygon_print(Polygon* poly);
 
 #endif

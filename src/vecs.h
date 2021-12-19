@@ -1,28 +1,22 @@
 #ifndef VECS_H
 #define VECS_H
 
-/*
- * floating point Vec3d struct declarations below
- */
 typedef struct {
     float x, y, z;
-} Vec3d;
+} Vec3;
 
-Vec3d* Vec3d_new(float x, float y, float z);
-void Vec3d_print(Vec3d* vec);
-void Vec3d_add(Vec3d* u, Vec3d* v, Vec3d* res);
-void Vec3d_crossprod(Vec3d* u, Vec3d* v, Vec3d* res);
-float Vec3d_dotprod(Vec3d* u, Vec3d* v);
+Vec3* Vec3_new(float x, float y, float z);
+void Vec3_print(Vec3* vec);
+void Vec3_add(Vec3* u, Vec3* v, Vec3* res);
+void Vec3_crossprod(Vec3* u, Vec3* v, Vec3* res);
+float Vec3_dotprod(Vec3* u, Vec3* v);
 
 
-/*
- * integer Vec3d struct declarations below
- */
 typedef struct {
     int x, y, z;
-} iVec3d;
+} iVec3;
 
-iVec3d* iVec3d_new(int x, int y, int z);
-void iVec3d_print(iVec3d* ivec);
+iVec3* iVec3_new(int x, int y, int z);
+void iVec3_print(iVec3* ivec);
 
 #endif

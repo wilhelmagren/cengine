@@ -1,5 +1,5 @@
-#ifndef MATS_H
-#define MATS_H
+#ifndef MATRICES_H
+#define MATRICES_H
 #include "vecs.h"
 
 typedef struct {
@@ -15,5 +15,5 @@ Mat4x4* Mat4x4_RotY(float theta, float vel);
 Mat4x4* Mat4x4_RotZ(float theta, float vel);
 void Mat4x4_print(Mat4x4* mat, char* name);
 
-void MatMul(Vec3d* vec, Mat4x4* mat, Vec3d* res);
+void MatMul(Vec3* vec, Mat4x4* mat, Vec3* res);
 #endif

@@ -13,14 +13,14 @@
 
 int main(int argc, char** argv) {
 
-    Vec3d* a = Vec3d_new(0.0f, 0.0f, 0.0f);
-    Vec3d* b = Vec3d_new(0.0f, 1.0f, 0.0f);
-    Vec3d* c = Vec3d_new(1.0f, 1.0f, 0.0f);
-    Vec3d* d = Vec3d_new(1.0f, 0.0f, 0.0f);
-    Vec3d* e = Vec3d_new(0.0f, 0.0f, 1.0f);
-    Vec3d* f = Vec3d_new(0.0f, 1.0f, 1.0f);
-    Vec3d* g = Vec3d_new(1.0f, 1.0f, 1.0f);
-    Vec3d* h = Vec3d_new(1.0f, 0.0f, 1.0f);
+    Vec3* a = Vec3_new(0.0f, 0.0f, 0.0f);
+    Vec3* b = Vec3_new(0.0f, 1.0f, 0.0f);
+    Vec3* c = Vec3_new(1.0f, 1.0f, 0.0f);
+    Vec3* d = Vec3_new(1.0f, 0.0f, 0.0f);
+    Vec3* e = Vec3_new(0.0f, 0.0f, 1.0f);
+    Vec3* f = Vec3_new(0.0f, 1.0f, 1.0f);
+    Vec3* g = Vec3_new(1.0f, 1.0f, 1.0f);
+    Vec3* h = Vec3_new(1.0f, 0.0f, 1.0f);
 
     Polygon* p1 = Polygon_new(a, b, c);
     Polygon* p2 = Polygon_new(a, c, d);
