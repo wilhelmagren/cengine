@@ -3,8 +3,8 @@ CFLAGS = -Wall -Werror
 LDFLAGS = -lSDL2 -lm
 
 OBJFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/mats.o
-CUBEFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/mats.o src/example_cube.o 
-PYRAMIDFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/mats.o src/example_pyramid.o
+CUBEFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/mats.o examples/cube.o 
+PYRAMIDFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/mats.o examples/pyramid.o
 
 TARGET = cengine
 EXAMPLE_CUBE = cube
