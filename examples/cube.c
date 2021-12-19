@@ -3,12 +3,12 @@
 #include "SDL2/SDL.h"
 #include "../src/mesh.h"
 #include "../src/defaults.h"
-#include "../src/mats.h"
+#include "../src/matrices.h"
 #include "../src/vecs.h"
 #include "../src/polygon.h"
 #include "../src/mesh.h"
 #include "../src/draw.h"
-#include "../src/color.h"
+#include "../src/colors.h"
 
 
 int main(int argc, char** argv) {

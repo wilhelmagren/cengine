@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include "mats.h"
+#include "matrices.h"
 
 Mat4x4* Mat4x4_Identity() {
     Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));

@@ -2,9 +2,9 @@ CC = gcc
 CFLAGS = -Wall -Werror
 LDFLAGS = -lSDL2 -lm
 
-OBJFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/mats.o
-CUBEFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/mats.o examples/cube.o 
-PYRAMIDFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/mats.o examples/pyramid.o
+OBJFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/matrices.o
+CUBEFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/matrices.o examples/cube.o 
+PYRAMIDFILES = src/vecs.o src/polygon.o src/mesh.o src/draw.o src/matrices.o examples/pyramid.o
 
 TARGET = cengine
 EXAMPLE_CUBE = cube
