@@ -1,14 +1,12 @@
-/*
- * Screen size defaults
- *  4:3 resolution
- *  window offset start (x,y)=(100,50)
- */
-#define WINDOW_W 800
-#define WINDOW_H 800
-#define WINDOW_OPACITY 200
+#ifndef DEFAULTS_h
+#define DEFAULT_H
 
-#define FPS_TARGET 60
-/*
- * Mesh buffer default size
- */
-#define MESH_BUFFER_SIZE 1024
+#define DEFAULT_WINDOW_W 1024
+#define DEFAULT_WINDOW_H 768
+#define DEFAULT_OPACITY 255
+#define DEFAULT_FOV 80.0
+
+#define DEFAULT_FPS_TARGET 60
+#define DEFAULT_MESH_BUFFER_SIZE 1024
+
+#endif

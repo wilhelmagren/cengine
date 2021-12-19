@@ -5,7 +5,7 @@
 #include "defaults.h"
 
 typedef struct {
-    Polygon* polygons[MESH_BUFFER_SIZE];
+    Polygon* polygons[DEFAULT_MESH_BUFFER_SIZE];
     int pidx;
 } Mesh;
 

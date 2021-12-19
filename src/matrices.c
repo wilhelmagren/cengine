@@ -6,12 +6,10 @@
 
 Mat4x4* Mat4x4_Identity() {
     Mat4x4* mat = (Mat4x4*)malloc(sizeof(Mat4x4));
-    float tmp[4][4] = {
-        {1.0f, 0.0f, 0.0f, 0.0f},
-        {0.0f, 1.0f, 0.0f, 0.0f},
-        {0.0f, 0.0f, 1.0f, 0.0f},
-        {0.0f, 0.0f, 0.0f, 1.0f}};
-    memcpy(mat->m, tmp, sizeof(tmp));
+    mat->m[0][0] = 1.0f;
+    mat->m[1][1] = 1.0f;
+    mat->m[2][2] = 1.0f;
+    mat->m[3][3] = 1.0f;
     return mat;
 }
 
