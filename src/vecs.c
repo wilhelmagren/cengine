@@ -35,6 +35,9 @@ float Vec3_dotprod(Vec3* u, Vec3* v) {
     return x + y + z;
 }
 
+void Vec3_Destroy(Vec3* vec) {
+    free(vec);
+}
 
 iVec3* iVec3_new(int x, int y, int z) {
     iVec3* ivec = (iVec3*)malloc(sizeof(iVec3));
