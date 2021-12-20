@@ -9,7 +9,12 @@ Vec3* Vec3_Constructor(s16 x, s16 y, s16 z) {
     vec->y = y;
     vec->z = z;
     vec->magnitude = _Magnitude(x, y, z);
+    vec->pointers = 0;
     return vec;
+}
+
+Vec3* _CopyVec3(Vec3* u) {
+    return Vec3_Constructor(u->x, u->y, u->z);
 }
 
 void _Add(Vec3* u, Vec3* v, Vec3* res) {
