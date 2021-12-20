@@ -3,7 +3,7 @@
 #include "vec3.h"
 
 
-Vec3* Vec3_Constructor(s16 x, s16 y, s16 z) {
+Vec3* Vec3_Constructor(f8 x, f8 y, f8 z) {
     Vec3* vec = (Vec3*)malloc(sizeof(Vec3));
     vec->x = x;
     vec->y = y;
@@ -39,7 +39,7 @@ f8 _DotProduct(Vec3* u, Vec3* v) {
     return u->x*v->x + u->y*v->y + u->z*v->z;
 }
 
-f8 _Magnitude(s16 x, s16 y, s16 z) {
+f8 _Magnitude(f8 x, f8 y, f8 z) {
     return (f8)sqrt(x*x + y*y + z*z);
 }
 
