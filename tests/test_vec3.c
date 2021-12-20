@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include <assert.h>
 #include "../src/vec3.h"
 #include "../src/utils.h"
@@ -21,9 +22,15 @@ int main(int argc, char** argv) {
     assert(u->y ==  0);
     assert(u->z ==  0);
 
-    f8 dotres = _DotProduct(u, v);
+    f8 dotprod = _DotProduct(u, v);
 
-    assert(dotres == -2.0f);
+    assert(dotprod == -2.0f);
+
+    f8 magnitude_u = u->magnitude;
+    f8 magnitude_v = v->magnitude;
+
+    assert(magnitude_u ==  1.0f);
+    assert(magnitude_v == sqrt(24.0f));
 
     fprintf(stdout, "All tests passed for struct Vec3!\n");
     return 0;
