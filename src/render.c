@@ -19,4 +19,5 @@ void CENGINE_RenderMesh(Instance* instance, Mesh* m) {
         Polygon* curr = m->polygons[i];
         _RenderPolygon(instance->renderer, curr, curr->color);
     }
+    SDL_RenderPresent(instance->renderer);
 }

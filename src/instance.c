@@ -38,7 +38,7 @@ Instance* Instance_FULL_INIT() {
 
     inst->renderer = renderer;
     inst->window = window;
-    inst->camera = Camera_New(0.0f, 0.0f, -2.0f,
+    inst->camera = Camera_New(0.0f, 0.0f, 0.0f,
             DEFAULT_WINDOW_W, DEFAULT_WINDOW_H, DEFAULT_FOV, 0.1f, 1000.0f);
     return inst;
 }
@@ -95,10 +95,9 @@ void Instance_RUN(Instance* instance) {
         SDL_SetRenderDrawColor(instance->renderer, 40, 40, 40, 255);
         SDL_RenderClear(instance->renderer);
         CENGINE_ProjectPolygons(instance->camera, meshcopy);
-        CENGINE_RotatePolygons(meshcopy);
+        //CENGINE_RotatePolygons(meshcopy);
         CENGINE_ScalePolygons(instance->camera, meshcopy);
         CENGINE_RenderMesh(instance, meshcopy);
-        SDL_RenderPresent(instance->renderer);
 
         while (SDL_PollEvent(&event)) {
             if (event.type == SDL_QUIT) {
