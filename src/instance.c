@@ -111,7 +111,7 @@ void Instance_RUN(Instance* instance) {
         float ms_elapsed = (float)(SDL_GetPerformanceCounter() - t_start)/(float)SDL_GetPerformanceFrequency()*1000.0f;
         float ms_delay = ms_target - ms_elapsed;
         if (ms_delay <= 0.0f) {
-            printf("no delay, current frame %0.3f ms behind target render-time...", ms_delay);
+            printf("no delay, current frame %0.3f ms behind target render-time...\n", ms_delay);
         } else {
             SDL_Delay(fmax(0.0f, ms_delay));
         }
