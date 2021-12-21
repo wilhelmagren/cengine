@@ -2,8 +2,8 @@
 #include "render.h"
 #include "instance.h"
 
-void CENGINE_RenderPolygon(SDL_Renderer* renderer, Polygon* polygon, COLOR color) {
-    SDL_SetRenderDrawColor(renderer, color.r, color.g, color.b, 255);
+void CENGINE_RenderPolygon(SDL_Renderer* renderer, Polygon* polygon, const COLOR color) {
+    SDL_SetRenderDrawColor(renderer, color[0], color[1], color[2], 255);
     for (u8 i = 0; i < 3; i++) {
         f8 x1 = polygon->vecs[i]->x;
         f8 y1 = polygon->vecs[i]->y;

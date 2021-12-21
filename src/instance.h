@@ -1,6 +1,7 @@
 #ifndef INSTANCE_H
 #define INSTANCE_H
 #include "SDL2/SDL.h"
+#include "utils.h"
 
 typedef struct {
     SDL_Window* window;

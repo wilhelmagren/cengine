@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "instance.h"
-#include "utils.h"
 
 CENGINE_Instance* CENGINE_INIT(SDL_Window* window, SDL_Renderer* renderer) {
     CENGINE_Instance* instance = (CENGINE_Instance*)malloc(sizeof(CENGINE_Instance));
