@@ -15,3 +15,8 @@ const int DEFAULT_WINDOW_OPACITY = 255;
 const f4 TARGET_FPS = (f4) 60.0f;
 const f4 TARGET_RENDERTIME_MS = (f4) 1.0f / TARGET_FPS;
 
+bool _f4Equality(f4 a, f4 b) {
+    f4 precision = 0.000001;
+    return fabs(a-b) < precision;
+}
+

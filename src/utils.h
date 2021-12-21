@@ -1,6 +1,8 @@
 #ifndef UTILS_H
 #define UTILS_H
 #include <stdint.h>
+#include <stdbool.h>
+#include <math.h>
 
 
 typedef uint8_t u8;
@@ -32,5 +34,7 @@ extern const int DEFAULT_WINDOW_OPACITY;
 
 extern const f4 TARGET_FPS;
 extern const f4 TARGET_RENDERTIME_MS;
+
+bool _f4Equality(f4 a, f4 b);
 
 #endif
