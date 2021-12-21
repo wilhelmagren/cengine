@@ -19,15 +19,16 @@ typedef long double f10;
 typedef u8 COLOR[3];
 
 extern const COLOR BLACK;
+extern const COLOR GRAY;
 extern const COLOR WHITE;
 extern const COLOR RED;
 extern const COLOR GREEN;
 extern const COLOR BLUE;
 
 
-extern const u8 DEFAULT_WINDOW_W;
-extern const u8 DEFAULT_WINDOW_H;
-extern const u8 DEFAULT_WINDOW_OPACITY;
+extern const int DEFAULT_WINDOW_W;
+extern const int DEFAULT_WINDOW_H;
+extern const int DEFAULT_WINDOW_OPACITY;
 
 extern const f4 TARGET_FPS;
 extern const f4 TARGET_RENDERTIME_MS;

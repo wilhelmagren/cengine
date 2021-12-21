@@ -34,3 +34,28 @@ CENGINE_Instance* CENGINE_INIT_FULL() {
     instance->renderer = renderer;
     return instance;
 }
+
+void CENGINE_LOOP(CENGINE_Instance* instance) {
+    SDL_bool quit = SDL_FALSE;
+    while (!quit) {
+
+        SDL_Event event;
+        SDL_RenderSetLogicalSize(instance->renderer, 0, 0);
+        SDL_SetRenderDrawColor(instance->renderer, GRAY[0], GRAY[1], GRAY[2], 255);
+        SDL_RenderClear(instance->renderer);
+        SDL_RenderPresent(instance->renderer);
+
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = SDL_TRUE;
+            }
+        }
+    }
+}
+
+void CENGINE_DestroyInstance(CENGINE_Instance* instance) {
+    SDL_DestroyWindow(instance->window);
+    SDL_DestroyRenderer(instance->renderer);
+    SDL_Quit();
+    free(instance);
+}
