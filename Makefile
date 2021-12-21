@@ -2,9 +2,9 @@ CC = gcc
 CFLAGS = -Wall -Werror
 LDFLAGS = -lSDL2 -lm
 
-TEST_VEC3FILES = src/vec3.o tests/test_vec3.o
-TEST_POLYGONFILES = src/vec3.o src/polygon.o tests/test_polygon.o
-TEST_RENDERFILES = src/vec3.o src/polygon.o src/instance.o src/render.o tests/test_render.o
+TEST_VEC3FILES = src/vec3.o src/utils.o tests/test_vec3.o
+TEST_POLYGONFILES = src/vec3.o src/utils.o src/polygon.o tests/test_polygon.o
+TEST_RENDERFILES = src/vec3.o src/utils.o src/polygon.o src/instance.o src/render.o tests/test_render.o
 
 TEST_VEC3 = vec3_test
 TEST_POLYGON = polygon_test
