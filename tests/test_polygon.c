@@ -2,8 +2,6 @@
 #include <stdio.h>
 #include <assert.h>
 #include "../src/polygon.h"
-#include "../src/vec3.h"
-#include "../src/utils.h"
 
 
 int main(int argc, char** argv) {
