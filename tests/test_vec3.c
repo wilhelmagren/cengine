@@ -10,19 +10,19 @@ int main(int argc, char** argv) {
 
     Vec3* u = Vec3_Constructor( -1,  0,  0);
     Vec3* v = Vec3_Constructor(  2,  4, -2);
-    _Add(u, v, u);
+    _Vec3Add(u, v, u);
 
     assert(u->x ==  1);
     assert(u->y ==  4);
     assert(u->z == -2);
 
-    _Subtract(u, v, u);
+    _Vec3Subtract(u, v, u);
 
     assert(u->x == -1);
     assert(u->y ==  0);
     assert(u->z ==  0);
 
-    f8 dotprod = _DotProduct(u, v);
+    f8 dotprod = _Vec3DotProduct(u, v);
 
     assert(dotprod == -2.0f);
 
