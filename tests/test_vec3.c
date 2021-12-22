@@ -33,11 +33,17 @@ int main(int argc, char** argv) {
     assert(magnitude_v == sqrt(24.0));
 
     Vec3* cross = Vec3_Constructor(  0,  0,  0);
+    Vec3* zerocross = Vec3_Constructor(  0,  0,  0);
     _Vec3CrossProduct(u, v, cross);
+    _Vec3CrossProduct(u, u, zerocross);
 
     assert(cross->x ==  0.0);
     assert(cross->y == -2.0);
     assert(cross->z == -4.0);
+
+    assert(zerocross->x == 0.0);
+    assert(zerocross->y == 0.0);
+    assert(zerocross->z == 0.0);
 
     fprintf(stdout, "All tests passed for struct Vec3!\n");
     return 0;
