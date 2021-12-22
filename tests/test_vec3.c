@@ -24,13 +24,20 @@ int main(int argc, char** argv) {
 
     f8 dotprod = _Vec3DotProduct(u, v);
 
-    assert(dotprod == -2.0f);
+    assert(dotprod == -2.0);
 
     f8 magnitude_u = u->magnitude;
     f8 magnitude_v = v->magnitude;
 
-    assert(magnitude_u ==  1.0f);
-    assert(magnitude_v == sqrt(24.0f));
+    assert(magnitude_u ==  1.0);
+    assert(magnitude_v == sqrt(24.0));
+
+    Vec3* cross = Vec3_Constructor(  0,  0,  0);
+    _Vec3CrossProduct(u, v, cross);
+
+    assert(cross->x ==  0.0);
+    assert(cross->y == -2.0);
+    assert(cross->z == -4.0);
 
     fprintf(stdout, "All tests passed for struct Vec3!\n");
     return 0;
