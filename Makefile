@@ -2,11 +2,14 @@ CC = gcc
 CFLAGS = -Wall -Werror -O3
 LDFLAGS = -lSDL2 -lm
 
-TEST_VEC3FILES = src/vec3.o src/utils.o tests/test_vec3.o
-TEST_POLYGONFILES = src/vec3.o src/utils.o src/polygon.o src/matrices.o tests/test_polygon.o
-TEST_MATRICESFILES = src/matrices.o src/utils.o tests/test_matrices.o
-TEST_INSTANCEFILES = src/instance.o src/utils.o tests/test_instance.o
-TEST_RENDERFILES = src/vec3.o src/matrices.o src/utils.o src/polygon.o src/instance.o src/render.o tests/test_render.o
+TEST_VEC3FILES = src/utils.o src/vec3.o tests/test_vec3.o
+TEST_POLYGONFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o tests/test_polygon.o
+TEST_MATRICESFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o tests/test_matrices.o
+TEST_INSTANCEFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o  tests/test_instance.o
+TEST_RENDERFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o tests/test_render.o
+
+
+OBJFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o 
 
 TEST_VEC3 = vec3_test
 TEST_POLYGON = polygon_test
