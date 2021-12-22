@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include "../src/polygon.h"
+#include "../src/CENGINE.h"
 
 
 int main(int argc, char** argv) {
