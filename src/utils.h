@@ -28,9 +28,9 @@ extern const COLOR GREEN;
 extern const COLOR BLUE;
 
 
-extern const int DEFAULT_WINDOW_W;
-extern const int DEFAULT_WINDOW_H;
-extern const int DEFAULT_WINDOW_OPACITY;
+extern const f4 DEFAULT_WINDOW_W;
+extern const f4 DEFAULT_WINDOW_H;
+extern const f4 DEFAULT_WINDOW_OPACITY;
 
 extern const f4 TARGET_FPS;
 extern const f4 TARGET_RENDERTIME_MS;

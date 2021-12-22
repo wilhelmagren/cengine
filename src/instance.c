@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "instance.h"
 
 CENGINE_Instance* CENGINE_INIT(SDL_Window* window, SDL_Renderer* renderer) {
@@ -9,7 +10,7 @@ CENGINE_Instance* CENGINE_INIT(SDL_Window* window, SDL_Renderer* renderer) {
     return instance;
 }
 
-CENGINE_Instance* CENGINE_INIT_FULL() {
+CENGINE_Instance* CENGINE_INIT_FULL(f4 delay) {
     CENGINE_Instance* instance = (CENGINE_Instance*)malloc(sizeof(CENGINE_Instance));
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -32,6 +33,9 @@ CENGINE_Instance* CENGINE_INIT_FULL() {
 
     instance->window = window;
     instance->renderer = renderer;
+
+    SDL_Delay(fmax(0.0, delay));
+
     return instance;
 }
 
