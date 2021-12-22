@@ -6,11 +6,10 @@
 typedef struct {
     SDL_Window* window;
     SDL_Renderer* renderer;
-} CENGINE_Instance;
+} Instance;
 
-CENGINE_Instance* CENGINE_INIT(SDL_Window* window, SDL_Renderer* renderer);
-CENGINE_Instance* CENGINE_INIT_FULL(f4 delay);
-void CENGINE_LOOP(CENGINE_Instance* instance);
-void CENGINE_DestroyInstance(CENGINE_Instance* instance);
+Instance* CENGINE_INIT(SDL_Window* window, SDL_Renderer* renderer);
+Instance* CENGINE_INIT_FULL(f4 delay);
+void CENGINE_LOOP(Instance* instance);
 
 #endif

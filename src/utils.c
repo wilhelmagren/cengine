@@ -10,7 +10,7 @@ const COLOR BLUE    = {   0,   0, 255 };
 
 const f4 DEFAULT_WINDOW_W = (f4) 1024;
 const f4 DEFAULT_WINDOW_H = (f4) 768;
-const f4 DEFAULT_WINDOW_OPACITY = 255;
+const f4 DEFAULT_WINDOW_OPACITY = (f4) 255;
 
 const f4 TARGET_FPS = (f4) 60.0;
 const f4 TARGET_RENDERTIME_MS = (f4) 1.0 / TARGET_FPS;

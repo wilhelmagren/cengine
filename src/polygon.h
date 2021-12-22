@@ -11,6 +11,5 @@ typedef struct {
 Polygon* Polygon_Constructor(Vec3* u, Vec3* v, Vec3* w);
 Polygon* _PolygonCopy(Polygon* polygon);
 void _PolygonProject(Polygon* a, Mat4x4* proj, Polygon* b);
-void CENGINE_DestroyPolygon(Polygon* polygon);
 
 #endif

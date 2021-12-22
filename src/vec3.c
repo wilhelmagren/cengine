@@ -14,7 +14,7 @@ Vec3* Vec3_Constructor(f8 x, f8 y, f8 z, f8 w) {
     return vec;
 }
 
-Vec3* _CopyVec3(Vec3* u) {
+Vec3* _Vec3Copy(Vec3* u) {
     return Vec3_Constructor(u->x, u->y, u->z, u->w);
 }
 
@@ -43,6 +43,7 @@ void _Vec3Multiply(Vec3* vec, f4 val) {
 }
 
 void _Vec3Divide(Vec3* vec, f4 val) {
+    if (val == 0.0) return;
     vec->x /= val;
     vec->y /= val;
     vec->z /= val;

@@ -88,8 +88,3 @@ bool _MatrixEqualMatrix(Mat4x4* a, Mat4x4* b) {
     }
     return true;
 }
-
-void CENGINE_DestroyMat4x4(Mat4x4* matrix) {
-    free(matrix);
-}
-

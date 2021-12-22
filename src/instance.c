@@ -3,15 +3,15 @@
 #include <math.h>
 #include "instance.h"
 
-CENGINE_Instance* CENGINE_INIT(SDL_Window* window, SDL_Renderer* renderer) {
-    CENGINE_Instance* instance = (CENGINE_Instance*)malloc(sizeof(CENGINE_Instance));
+Instance* CENGINE_INIT(SDL_Window* window, SDL_Renderer* renderer) {
+    Instance* instance = (Instance*)malloc(sizeof(Instance));
     instance->window = window;
     instance->renderer = renderer;
     return instance;
 }
 
-CENGINE_Instance* CENGINE_INIT_FULL(f4 delay) {
-    CENGINE_Instance* instance = (CENGINE_Instance*)malloc(sizeof(CENGINE_Instance));
+Instance* CENGINE_INIT_FULL(f4 delay) {
+    Instance* instance = (Instance*)malloc(sizeof(Instance));
 
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         fprintf(stderr, "Could not initialize SDL: %s\n", SDL_GetError());
@@ -39,7 +39,7 @@ CENGINE_Instance* CENGINE_INIT_FULL(f4 delay) {
     return instance;
 }
 
-void CENGINE_LOOP(CENGINE_Instance* instance) {
+void CENGINE_LOOP(Instance* instance) {
     SDL_bool quit = SDL_FALSE;
     while (!quit) {
 
@@ -57,9 +57,3 @@ void CENGINE_LOOP(CENGINE_Instance* instance) {
     }
 }
 
-void CENGINE_DestroyInstance(CENGINE_Instance* instance) {
-    SDL_DestroyWindow(instance->window);
-    SDL_DestroyRenderer(instance->renderer);
-    SDL_Quit();
-    free(instance);
-}
