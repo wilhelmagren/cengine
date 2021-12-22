@@ -28,7 +28,7 @@ int main(int argc, char** argv) {
     SDL_Delay(1000);
     CENGINE_DestroyInstance(instance);
 
-    instance = CENGINE_INIT_FULL();
+    instance = CENGINE_INIT_FULL(1000);
     CENGINE_LOOP(instance);
     CENGINE_DestroyInstance(instance);
 

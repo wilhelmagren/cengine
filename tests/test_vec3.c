@@ -8,8 +8,8 @@
 
 int main(int argc, char** argv) {
 
-    Vec3* u = Vec3_Constructor( -1,  0,  0);
-    Vec3* v = Vec3_Constructor(  2,  4, -2);
+    Vec3* u = Vec3_Constructor( -1,  0,  0,  0);
+    Vec3* v = Vec3_Constructor(  2,  4, -2,  0);
     _Vec3Add(u, v, u);
 
     assert(u->x ==  1);
@@ -26,14 +26,14 @@ int main(int argc, char** argv) {
 
     assert(dotprod == -2.0);
 
-    f8 magnitude_u = u->magnitude;
-    f8 magnitude_v = v->magnitude;
+    f8 magnitude_u = _Vec3Magnitude(u);
+    f8 magnitude_v = _Vec3Magnitude(v);
 
     assert(magnitude_u ==  1.0);
     assert(magnitude_v == sqrt(24.0));
 
-    Vec3* cross = Vec3_Constructor(  0,  0,  0);
-    Vec3* zerocross = Vec3_Constructor(  0,  0,  0);
+    Vec3* cross = Vec3_Constructor(  0,  0,  0,  0);
+    Vec3* zerocross = Vec3_Constructor(  0,  0,  0,  0);
     _Vec3CrossProduct(u, v, cross);
     _Vec3CrossProduct(u, u, zerocross);
 
