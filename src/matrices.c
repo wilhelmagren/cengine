@@ -33,10 +33,32 @@ Mat4x4* Mat4x4_Create(f4 items[4][4]) {
     return matrix;
 }
 
+Mat4x4* Mat4x4_Projection(f4 near, f4 far, f4 fov, f4 ratio) {
+    Mat4x4* matrix = Mat4x4_Zeros();
+    f4 rfov = (f4) 1.0 / tanf(fov * 0.5 / (180.0 * 3.141592));
+    f4 zdiv = (f4) far / (far - near);
+    matrix->items[0][0] = ratio*rfov;
+    matrix->items[1][1] = rfov;
+    matrix->items[2][2] = zdiv;
+    matrix->items[3][2] = -near * zdiv;
+    matrix->items[2][3] = (f4) 1.0;
+
+    return matrix;
+}
+
+void _MatrixVecMultiply(Vec3* vec, Mat4x4* matrix, Vec3* res) {
+    f4 x = vec->x, y = vec->y, z = vec->z, w = vec->w;
+    printf("x=%f, y=%f, z=%f, w=%f\n", x, y, z, w);
+    _MatrixPrint(matrix, true);
+    res->x = x*matrix->items[0][0] + y*matrix->items[1][0] + z*matrix->items[2][0] + w*matrix->items[3][0];
+    res->y = x*matrix->items[0][1] + y*matrix->items[1][1] + z*matrix->items[2][1] + w*matrix->items[3][1];
+    res->x = x*matrix->items[0][2] + y*matrix->items[1][2] + z*matrix->items[2][2] + w*matrix->items[3][2];
+    res->w = x*matrix->items[0][3] + y*matrix->items[1][3] + z*matrix->items[2][3] + w*matrix->items[3][3];
+}
+
 void _MatrixMatrixMultiply(Mat4x4* a, Mat4x4* b, Mat4x4* res) {
     for (u8 i = 0; i < 4; i++) {
         for (u8 j = 0; j < 4; j++) {
-            // ROW FROM a, COLUMN FROM B, calculate the dot prod
             for (u8 k = 0; k < 4; k++) {
                 res->items[i][j] += a->items[i][k] * b->items[k][j];
             }
