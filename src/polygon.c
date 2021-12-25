@@ -1,8 +1,9 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "polygon.h"
 
-Polygon* Polygon_Constructor(Vec3* u, Vec3* v, Vec3* w) {
+Polygon* Polygon_Constructor(Vec3* u, Vec3* v, Vec3* w, const COLOR color) {
     Polygon* polygon = (Polygon*)malloc(sizeof(Polygon));
     u->pointers += 1;
     v->pointers += 1;
@@ -10,6 +11,7 @@ Polygon* Polygon_Constructor(Vec3* u, Vec3* v, Vec3* w) {
     polygon->vecs[0] = u;
     polygon->vecs[1] = v;
     polygon->vecs[2] = w;
+    memcpy(&polygon->color, &color, 3*sizeof(u8));
     return polygon;
 }
 

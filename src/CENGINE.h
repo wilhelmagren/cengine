@@ -10,7 +10,8 @@
 
 
 // void CENGINE_DrawMesh(Mesh* mesh);
-void CENGINE_DrawPolygon(SDL_Renderer* renderer, Polygon* polygon, const COLOR color);
+void CENGINE_DrawPolygon(SDL_Renderer* renderer, Polygon* polygon);
+void CENGINE_DrawMesh(SDL_Renderer* renderer, Mesh* mesh);
 void CENGINE_DestroyPolygon(Polygon* polygon);
 void CENGINE_DestroyMesh(Mesh* mesh);
 void CENGINE_DestroyInstance(Instance* instance);

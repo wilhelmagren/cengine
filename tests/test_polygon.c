@@ -11,8 +11,8 @@ int main(int argc, char** argv) {
     Vec3* c = Vec3_Constructor(  1,  1,  0,  0);
     Vec3* d = Vec3_Constructor(  1,  0, -0,  0);
 
-    Polygon* p1 = Polygon_Constructor(a, b, c);
-    Polygon* p2 = Polygon_Constructor(a, c, d);
+    Polygon* p1 = Polygon_Constructor(a, b, c, WHITE);
+    Polygon* p2 = Polygon_Constructor(a, c, d, WHITE);
 
     assert(a->pointers == 2);
     assert(d->pointers == 1);
