@@ -6,13 +6,27 @@
 
 void CENGINE_DrawPolygon(SDL_Renderer* renderer, Polygon* polygon) {
     SDL_SetRenderDrawColor(renderer, polygon->color[0], polygon->color[1], polygon->color[2], 255);
-    for (u8 i = 0; i < 3; i++) {
-        f8 x1 = polygon->vecs[i]->x;
-        f8 y1 = polygon->vecs[i]->y;
-        f8 x2 = polygon->vecs[(i + 1) % 3]->x;
-        f8 y2 = polygon->vecs[(i + 1) % 3]->y;
-        SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+    Vec3* l1 = _Vec3Copy(polygon->vecs[1]);
+    Vec3* l2 = _Vec3Copy(polygon->vecs[2]);
+    _Vec3Subtract(polygon->vecs[1], polygon->vecs[0], l1);
+    _Vec3Subtract(polygon->vecs[2], polygon->vecs[0], l2);
+    _Vec3CrossProduct(l1, l2, l1);
+    _Vec3Normalize(l1);
+    Vec3* camera = Vec3_Constructor(0.0, 0.0, 0.0, 1.0);
+    _Vec3Subtract(polygon->vecs[0], camera, camera);
+
+    if (_Vec3DotProduct(l1, camera) < 0.0) {
+        for (u8 i = 0; i < 3; i++) {
+            f8 x1 = polygon->vecs[i]->x;
+            f8 y1 = polygon->vecs[i]->y;
+            f8 x2 = polygon->vecs[(i + 1) % 3]->x;
+            f8 y2 = polygon->vecs[(i + 1) % 3]->y;
+            SDL_RenderDrawLine(renderer, x1, y1, x2, y2);
+        }
     }
+    free(l1);
+    free(l2);
+    free(camera);
 }
 
 void CENGINE_DrawMesh(SDL_Renderer* renderer, Mesh* mesh) {

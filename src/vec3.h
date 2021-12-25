@@ -14,6 +14,7 @@ void _Vec3Subtract(Vec3* u, Vec3* v, Vec3* res);
 void _Vec3CrossProduct(Vec3* u, Vec3* v, Vec3* res);
 void _Vec3Multiply(Vec3* vec, f4 val);
 void _Vec3Divide(Vec3* vec, f4 val);
+void _Vec3Normalize(Vec3* vec);
 void _Vec3ScaleToWindow(Vec3* vec);
 f8 _Vec3DotProduct(Vec3* u, Vec3* v);
 f8 _Vec3Magnitude(Vec3* vec);
