@@ -15,7 +15,7 @@ Polygon* Polygon_Constructor(Vec3* u, Vec3* v, Vec3* w,
         f4 ax, f4 ay, f4 az, f4 dx, f4 dy, f4 dz, const COLOR color);
 Polygon* _PolygonCopy(Polygon* polygon);
 void _PolygonProject(Polygon* a, Mat4x4* proj, Polygon* b);
-void _PolygonRotate(Polygon* a, Mat4x4* rot, Polygon* b);
+void _PolygonMatrixVecMultiply(Polygon* a, Mat4x4* matrix, Polygon* b);
 void _PolygonTick(Polygon* polygon);
 
 #endif

@@ -47,8 +47,8 @@ void _PolygonProject(Polygon* a, Mat4x4* proj, Polygon* b) {
     }
 }
 
-void _PolygonRotate(Polygon* a, Mat4x4* rot, Polygon* b) {
-    for (u8 i = 0; i < 3; i++) { _MatrixVecMultiply(a->vecs[i], rot, b->vecs[i]); }
+void _PolygonMatrixVecMultiply(Polygon* a, Mat4x4* matrix, Polygon* b) {
+    for (u8 i = 0; i < 3; i++) { _MatrixVecMultiply(a->vecs[i], matrix, b->vecs[i]); }
 }
 
 void _PolygonTick(Polygon* polygon) {

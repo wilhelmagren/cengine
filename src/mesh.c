@@ -33,16 +33,23 @@ void _MeshProject(Mesh* mesh, Mat4x4* proj, Mesh* copy) {
 void _MeshRotate(Mesh* mesh, Mesh* copy) {
     for (u8 i = 0; i < mesh->idx; i++) {
         Mat4x4* rotZ = Mat4x4_RotationZ(mesh->polygons[i]->az);
-        _PolygonRotate(mesh->polygons[i], rotZ, copy->polygons[i]);
+        _PolygonMatrixVecMultiply(mesh->polygons[i], rotZ, copy->polygons[i]);
         free(rotZ);
 
         Mat4x4* rotY = Mat4x4_RotationY(mesh->polygons[i]->ay);
-        _PolygonRotate(copy->polygons[i], rotY, copy->polygons[i]);
+        _PolygonMatrixVecMultiply(copy->polygons[i], rotY, copy->polygons[i]);
         free(rotY);
 
         Mat4x4* rotX = Mat4x4_RotationX(mesh->polygons[i]->ax);
-        _PolygonRotate(copy->polygons[i], rotX, copy->polygons[i]);
+        _PolygonMatrixVecMultiply(copy->polygons[i], rotX, copy->polygons[i]);
         free(rotX);
+    }
+}
+
+void _MeshTranslate(Mesh* mesh, f4 x, f4 y, f4 z, Mesh* copy) {
+    Mat4x4* translation = Mat4x4_Translation(x, y, z);
+    for (u8 i = 0; i < mesh->idx; i++) {
+        _PolygonMatrixVecMultiply(mesh->polygons[i], translation, copy->polygons[i]);
     }
 }
 

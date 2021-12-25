@@ -76,6 +76,15 @@ Mat4x4* Mat4x4_Projection(f4 near, f4 far, f4 fov, f4 ratio) {
     return matrix;
 }
 
+Mat4x4* Mat4x4_Translation(f4 x, f4 y, f4 z) {
+    Mat4x4* matrix = Mat4x4_Identity();
+    matrix->items[3][0] = x;
+    matrix->items[3][1] = y;
+    matrix->items[3][2] = z;
+    
+    return matrix;
+}
+
 void _MatrixVecMultiply(Vec3* vec, Mat4x4* matrix, Vec3* res) {
     f4 x = vec->x, y = vec->y, z = vec->z, w = vec->w;
     res->x = x*matrix->items[0][0] + y*matrix->items[1][0] + z*matrix->items[2][0] + w*matrix->items[3][0];
