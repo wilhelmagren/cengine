@@ -10,6 +10,7 @@ typedef struct {
 
 
 Mesh* Mesh_Constructor();
+Mesh* _MeshCopy(Mesh* mesh);
 void _MeshPush(Mesh* mesh, Polygon* polygon);
 Polygon* _MeshPop(Mesh* mesh);
 void _MeshPrint(Mesh* mesh);

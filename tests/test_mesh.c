@@ -17,14 +17,17 @@ int main(int argc, char** argv) {
 
     _MeshPush(mesh, p1);
     _MeshPush(mesh, p2);
-
-    _MeshPrint(mesh);
-
     _MeshPop(mesh);
+    assert(mesh->idx == 1);
 
-    _MeshPrint(mesh);
+
+    Mesh* copy = _MeshCopy(mesh);
+
+    _MeshPop(copy);
+    assert(copy->idx == 0);
 
     CENGINE_DestroyMesh(mesh);
+    CENGINE_DestroyMesh(copy);
 
     fprintf(stdout, "All tests passed for struct Mesh!\n");
 
