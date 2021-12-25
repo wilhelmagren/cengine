@@ -35,6 +35,8 @@ extern const f4 DEFAULT_WINDOW_OPACITY;
 extern const f4 TARGET_FPS;
 extern const f4 TARGET_RENDERTIME_MS;
 
+#define DEFAULT_MESH_BUFFER 1024
+
 bool _f4Equality(f4 a, f4 b);
 
 #endif

@@ -25,6 +25,11 @@ void CENGINE_DestroyPolygon(Polygon* polygon) {
     free(polygon);
 }
 
+void CENGINE_DestroyMesh(Mesh* mesh) {
+    for (u8 i = 0; i < mesh->idx; i++) { free(mesh->polygons[i]); }
+    free(mesh);
+}
+
 void CENGINE_DestroyInstance(Instance* instance) {
     SDL_DestroyWindow(instance->window);
     SDL_DestroyRenderer(instance->renderer);
