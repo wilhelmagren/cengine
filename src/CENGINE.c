@@ -25,6 +25,10 @@ void CENGINE_DestroyPolygon(Polygon* polygon) {
     free(polygon);
 }
 
+void CENGINE_DestroyMatrix(Mat4x4* matrix) {
+    free(matrix);
+}
+
 void CENGINE_DestroyMesh(Mesh* mesh) {
     for (u8 i = 0; i < mesh->idx; i++) { free(mesh->polygons[i]); }
     free(mesh);

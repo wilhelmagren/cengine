@@ -13,6 +13,7 @@
 void CENGINE_DrawPolygon(SDL_Renderer* renderer, Polygon* polygon);
 void CENGINE_DrawMesh(SDL_Renderer* renderer, Mesh* mesh);
 void CENGINE_DestroyPolygon(Polygon* polygon);
+void CENGINE_DestroyMatrix(Mat4x4* matrix);
 void CENGINE_DestroyMesh(Mesh* mesh);
 void CENGINE_DestroyInstance(Instance* instance);
 
