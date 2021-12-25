@@ -12,6 +12,9 @@ Mat4x4* Mat4x4_Zeros();
 Mat4x4* Mat4x4_Ones();
 Mat4x4* Mat4x4_Identity();
 Mat4x4* Mat4x4_Create(f4 items[4][4]);
+Mat4x4* Mat4x4_RotationX(f4 angle);
+Mat4x4* Mat4x4_RotationY(f4 angle);
+Mat4x4* Mat4x4_RotationZ(f4 angle);
 Mat4x4* Mat4x4_Projection(f4 near, f4 far, f4 fov, f4 ratio);
 
 void _MatrixVecMultiply(Vec3* vec, Mat4x4* matrix, Vec3* res);

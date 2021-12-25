@@ -7,7 +7,7 @@ TEST_POLYGONFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/p
 TEST_MATRICESFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o tests/test_matrices.o
 TEST_INSTANCEFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o  tests/test_instance.o
 TEST_MESHFILES = src/mesh.o src/polygon.o src/CENGINE.o src/matrices.o src/utils.o src/vec3.o tests/test_mesh.o
-TEST_RENDERFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o tests/test_render.o
+TEST_CENGINEFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o tests/test_CENGINE.o
 
 
 OBJFILES = src/CENGINE.o src/instance.o src/matrices.o src/mesh.o src/polygon.o src/utils.o src/vec3.o 
@@ -17,7 +17,7 @@ TEST_POLYGON = polygon_test
 TEST_MATRICES = matrices_test
 TEST_MESH = mesh_test
 TEST_INSTANCE = instance_test
-TEST_RENDER = render_test
+TEST_CENGINE = CENGINE_test
 
 $(TEST_VEC3): $(TEST_VEC3FILES)
 	$(CC) -o $(TEST_VEC3) $(TEST_VEC3FILES) $(CFLAGS) $(LDFLAGS)
@@ -34,8 +34,8 @@ $(TEST_MESH): $(TEST_MESHFILES)
 $(TEST_INSTANCE): $(TEST_INSTANCEFILES)
 	$(CC) -o $(TEST_INSTANCE) $(TEST_INSTANCEFILES) $(CFLAGS) $(LDFLAGS)
 
-$(TEST_RENDER): $(TEST_RENDERFILES)
-	$(CC) -o $(TEST_RENDER) $(TEST_RENDERFILES) $(CFLAGS) $(LDFLAGS)
+$(TEST_CENGINE): $(TEST_CENGINEFILES)
+	$(CC) -o $(TEST_CENGINE) $(TEST_CENGINEFILES) $(CFLAGS) $(LDFLAGS)
 
 clean:
 	rm -f $(TEST_VEC3FILES) $(TEST_VEC3) *~
@@ -43,4 +43,4 @@ clean:
 	rm -f $(TEST_MATRICESFILES) $(TEST_MATRICES) *~
 	rm -f $(TEST_MESHFILES) $(TEST_MESH) *~
 	rm -f $(TEST_INSTANCEFILES) $(TEST_INSTANCE) *~
-	rm -f $(TEST_RENDERFILES) $(TEST_RENDER) *~
+	rm -f $(TEST_CENGINEFILES) $(TEST_CENGINE) *~

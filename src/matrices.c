@@ -1,6 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 #include "matrices.h"
 
 Mat4x4* Mat4x4_Zeros() {
@@ -31,6 +32,35 @@ Mat4x4* Mat4x4_Create(f4 items[4][4]) {
     Mat4x4* matrix = (Mat4x4*)malloc(sizeof(Mat4x4));
     memcpy(matrix->items, items, 16*sizeof(f4));
     return matrix;
+}
+
+Mat4x4* Mat4x4_RotationX(f4 angle) {
+    Mat4x4* rot = Mat4x4_Identity();
+    if (angle != 0.0) {
+        rot->items[1][1] =  cos(angle);
+        rot->items[1][2] = -sin(angle);
+        rot->items[2][1] =  sin(angle);
+        rot->items[2][2] =  cos(angle);
+    }
+    return rot;
+}
+
+Mat4x4* Mat4x4_RotationY(f4 angle) {
+    Mat4x4* rot = Mat4x4_Identity();
+    rot->items[0][0] =  cos(angle);
+    rot->items[0][2] =  sin(angle);
+    rot->items[2][0] = -sin(angle);
+    rot->items[2][2] =  cos(angle);
+    return rot;
+}
+
+Mat4x4* Mat4x4_RotationZ(f4 angle) {
+    Mat4x4* rot = Mat4x4_Identity();
+    rot->items[0][0] =  cos(angle);
+    rot->items[0][1] = -sin(angle);
+    rot->items[1][0] =  sin(angle);
+    rot->items[1][1] =  cos(angle);
+    return rot;
 }
 
 Mat4x4* Mat4x4_Projection(f4 near, f4 far, f4 fov, f4 ratio) {

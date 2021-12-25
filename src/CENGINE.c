@@ -15,6 +15,14 @@ void CENGINE_DrawPolygon(SDL_Renderer* renderer, Polygon* polygon) {
     }
 }
 
+void CENGINE_DrawMesh(SDL_Renderer* renderer, Mesh* mesh) {
+    for (u8 i = 0; i < mesh->idx; i++) { CENGINE_DrawPolygon(renderer, mesh->polygons[i]); }
+}
+
+void CENGINE_TickMesh(Mesh* mesh) {
+    for (u8 i = 0; i < mesh->idx; i++) { _PolygonTick(mesh->polygons[i]); }
+}
+
 void CENGINE_DestroyPolygon(Polygon* polygon) {
     for (u8 i = 0; i < 3; i++) {
         u8 pointers = polygon->vecs[i]->pointers;
