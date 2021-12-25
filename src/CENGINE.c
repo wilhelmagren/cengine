@@ -8,8 +8,8 @@ void CENGINE_DrawPolygon(SDL_Renderer* renderer, Polygon* polygon) {
     SDL_SetRenderDrawColor(renderer, polygon->color[0], polygon->color[1], polygon->color[2], 255);
     Vec3* l1 = _Vec3Copy(polygon->vecs[1]);
     Vec3* l2 = _Vec3Copy(polygon->vecs[2]);
-    _Vec3Subtract(polygon->vecs[1], polygon->vecs[0], l1);
-    _Vec3Subtract(polygon->vecs[2], polygon->vecs[0], l2);
+    _Vec3Subtract(l1, polygon->vecs[0], l1);
+    _Vec3Subtract(l2, polygon->vecs[0], l2);
     _Vec3CrossProduct(l1, l2, l1);
     _Vec3Normalize(l1);
     Vec3* camera = Vec3_Constructor(0.0, 0.0, 0.0, 1.0);
