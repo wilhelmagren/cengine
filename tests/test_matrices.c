@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
-#include "../src/matrices.h"
+#include "../src/CENGINE.h"
 
 
 int main(int argc, char** argv) {
@@ -38,13 +38,13 @@ int main(int argc, char** argv) {
     assert(_MatrixAllEqual(onestmp, 4.0));
     assert(_MatrixEqualMatrix(rand, randtmp));
 
-    CENGINE_DestroyMat4x4(zeros);
-    CENGINE_DestroyMat4x4(ones);
-    CENGINE_DestroyMat4x4(identity);
-    CENGINE_DestroyMat4x4(rand);
-    CENGINE_DestroyMat4x4(zerostmp);
-    CENGINE_DestroyMat4x4(onestmp);
-    CENGINE_DestroyMat4x4(randtmp);
+    CENGINE_DestroyMatrix(zeros);
+    CENGINE_DestroyMatrix(ones);
+    CENGINE_DestroyMatrix(identity);
+    CENGINE_DestroyMatrix(rand);
+    CENGINE_DestroyMatrix(zerostmp);
+    CENGINE_DestroyMatrix(onestmp);
+    CENGINE_DestroyMatrix(randtmp);
 
     fprintf(stdout, "All tests passed for struct Mat4x4!\n");
     return 0;
