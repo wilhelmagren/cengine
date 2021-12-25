@@ -84,9 +84,9 @@ int main(int argc, char** argv) {
         CENGINE_TickMesh(mesh);
         CENGINE_DestroyMesh(copy);
 
-        f4 t_elapsed = (f4) SDL_GetPerformanceCounter() / (f4) t_start;
+        f4 t_elapsed = ((f4) SDL_GetPerformanceCounter() - (f4) t_start) / (f4) SDL_GetPerformanceFrequency() * 1000.0;
         f4 delay = t_desired - t_elapsed;
-        if (delay < 0.0) fprintf(stdout, "no delay, current frame %0.3f ms behind target render-time...\n", delay);
+        if (delay < 0.0) fprintf(stdout, "no delay, current frame is %0.3f ms behind target render-time...\n", delay);
         SDL_Delay(fmax(delay, 0.0));
     }
     
