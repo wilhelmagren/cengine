@@ -16,29 +16,29 @@ int main(int argc, char** argv) {
     Vec3* h = Vec3_Constructor(  1,  0,  1,  1);
 
     Polygon* p1 = Polygon_Constructor(a, b, c,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p2 = Polygon_Constructor(a, c, d,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p3 = Polygon_Constructor(b, f, g,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p4 = Polygon_Constructor(b, g, c,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p5 = Polygon_Constructor(d, c, g,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p6 = Polygon_Constructor(d, g, h,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p7 = Polygon_Constructor(h, g, f,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p8 = Polygon_Constructor(h, f, e,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p9 = Polygon_Constructor(e, f, b,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p10 = Polygon_Constructor(e, b, a,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p11 = Polygon_Constructor(e, a, d,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
     Polygon* p12 = Polygon_Constructor(e, d, h,
-            0.0, 0.0, 0.0, 0.02, 0.01, 0.08, GREEN);
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, BLUE);
 
     Mesh* mesh = Mesh_Constructor();
     _MeshPush(mesh, p1);
@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
         Mesh* copy = _MeshCopy(mesh);
 
         _MeshRotate(copy, copy);
-        _MeshTranslate(copy, 0.0, 0.0, 10.0, copy);
+        _MeshTranslate(copy, 0.0, 0.0, 20.0, copy);
         _MeshProject(copy, proj, copy);
 
         SDL_RenderSetLogicalSize(instance->renderer, 0, 0);

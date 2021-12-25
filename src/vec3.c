@@ -49,6 +49,11 @@ void _Vec3Divide(Vec3* vec, f4 val) {
     vec->z /= val;
 }
 
+void _Vec3Normalize(Vec3* vec) {
+    f4 magnitude = _Vec3Magnitude(vec);
+    _Vec3Divide(vec, magnitude);
+}
+
 void _Vec3ScaleToWindow(Vec3* vec) {
     vec->x += (f4) 1.0;
     vec->y += (f4) 1.0;
