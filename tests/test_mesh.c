@@ -12,19 +12,21 @@ int main(int argc, char** argv) {
     Vec3* c = Vec3_Constructor(  1,  1,  3,  1);
     Vec3* d = Vec3_Constructor(  1,  0,  3,  1);
 
-    Polygon* p1 = Polygon_Constructor(a, b, c);
-    Polygon* p2 = Polygon_Constructor(a, c, d);
+    Polygon* p1 = Polygon_Constructor(a, b, c,
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, WHITE);
+    Polygon* p2 = Polygon_Constructor(a, c, d,
+            0.0, 0.0, 0.0, 0.02, 0.0, 0.05, WHITE);
 
     _MeshPush(mesh, p1);
     _MeshPush(mesh, p2);
     _MeshPop(mesh);
-    assert(mesh->idx == 1);
+    assert( mesh->idx == 1 );
 
 
     Mesh* copy = _MeshCopy(mesh);
 
     _MeshPop(copy);
-    assert(copy->idx == 0);
+    assert( copy->idx == 0 );
 
     CENGINE_DestroyMesh(mesh);
     CENGINE_DestroyMesh(copy);

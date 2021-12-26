@@ -2,8 +2,7 @@
 #include <stdio.h>
 #include <assert.h>
 #include "SDL2/SDL.h"
-#include "../src/instance.h"
-
+#include "../src/CENGINE.h"
 
 int main(int argc, char** argv) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -24,7 +23,7 @@ int main(int argc, char** argv) {
         return -1;
     }
 
-    CENGINE_Instance* instance = CENGINE_INIT(window, renderer);
+    Instance* instance = CENGINE_INIT(window, renderer);
     SDL_Delay(1000);
     CENGINE_DestroyInstance(instance);
 
